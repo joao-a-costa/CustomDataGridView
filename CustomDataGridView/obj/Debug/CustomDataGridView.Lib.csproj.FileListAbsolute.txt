@@ -1,0 +1,12 @@
+C:\projects\CustomDataGridView\CustomDataGridView\bin\Debug\CustomDataGridView.Lib.dll
+C:\projects\CustomDataGridView\CustomDataGridView\bin\Debug\CustomDataGridView.Lib.pdb
+C:\projects\CustomDataGridView\CustomDataGridView\bin\Debug\Newtonsoft.Json.dll
+C:\projects\CustomDataGridView\CustomDataGridView\bin\Debug\Newtonsoft.Json.xml
+C:\projects\CustomDataGridView\CustomDataGridView\obj\Debug\CustomDataGridView.Lib.csproj.AssemblyReference.cache
+C:\projects\CustomDataGridView\CustomDataGridView\obj\Debug\CustomDataGridView.Lib.Forms.ColumnSelectionForm.resources
+C:\projects\CustomDataGridView\CustomDataGridView\obj\Debug\CustomDataGridView.Lib.Components.CustomDataGridView.resources
+C:\projects\CustomDataGridView\CustomDataGridView\obj\Debug\CustomDataGridView.Lib.csproj.GenerateResource.cache
+C:\projects\CustomDataGridView\CustomDataGridView\obj\Debug\CustomDataGridView.Lib.csproj.CoreCompileInputs.cache
+C:\projects\CustomDataGridView\CustomDataGridView\obj\Debug\CustomDataGridView.Lib.csproj.CopyComplete
+C:\projects\CustomDataGridView\CustomDataGridView\obj\Debug\CustomDataGridView.Lib.dll
+C:\projects\CustomDataGridView\CustomDataGridView\obj\Debug\CustomDataGridView.Lib.pdb
