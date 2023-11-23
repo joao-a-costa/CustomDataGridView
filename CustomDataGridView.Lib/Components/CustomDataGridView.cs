@@ -62,6 +62,7 @@ namespace CustomDataGridView.Lib.Components
             // Create a button for the TopLeftHeaderCell
             topLeftButton.Height = ColumnHeadersHeight;
             topLeftButton.Width = _topLeftButtonWidth;
+            topLeftButton.Visible = false;
 
             // Add the button to the DataGridView's TopLeftHeaderCell
             Controls.Add(topLeftButton);
@@ -103,7 +104,16 @@ namespace CustomDataGridView.Lib.Components
         {
             foreach (DataGridViewColumn column in Columns)
             {
-                column.Visible = ColumnsSelected.Contains(column.Name);
+                if (!ColumnsSelected.Contains(column.Name))
+                {
+                    column.Visible = false;
+                }
+                else
+                {
+                    // Set the display order based on the index in your list
+                    column.Visible = true;
+                    column.DisplayIndex = ColumnsSelected.IndexOf(column.Name);
+                }
             }
         }
 
@@ -238,7 +248,12 @@ namespace CustomDataGridView.Lib.Components
         /// <summary>
         /// Event handler for CustomDataGridView DataBindingComplete
         /// </summary>
-        private void CustomDataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e) => ColumnsAvailable = Columns.Cast<DataGridViewColumn>().Select(s => s.Name).ToList();
+        private void CustomDataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            ColumnsAvailable = Columns.Cast<DataGridViewColumn>().Select(s => s.Name).ToList();
+
+            topLeftButton.Visible = ColumnsAvailable.Count > 0;
+        }
 
         #endregion
     }
