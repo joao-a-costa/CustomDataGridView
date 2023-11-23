@@ -47,26 +47,26 @@
             this.tsmExportToExcel,
             this.tsmDataGridViewOptions});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(179, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(157, 70);
             // 
             // tsmSelectColumns
             // 
             this.tsmSelectColumns.Name = "tsmSelectColumns";
-            this.tsmSelectColumns.Size = new System.Drawing.Size(178, 22);
+            this.tsmSelectColumns.Size = new System.Drawing.Size(156, 22);
             this.tsmSelectColumns.Text = "Select Columns";
             this.tsmSelectColumns.Click += new System.EventHandler(this.tsmSelectColumns_Click);
             // 
             // tsmExportToExcel
             // 
             this.tsmExportToExcel.Name = "tsmExportToExcel";
-            this.tsmExportToExcel.Size = new System.Drawing.Size(178, 22);
+            this.tsmExportToExcel.Size = new System.Drawing.Size(156, 22);
             this.tsmExportToExcel.Text = "Export to excel";
             this.tsmExportToExcel.Visible = false;
             // 
             // tsmDataGridViewOptions
             // 
             this.tsmDataGridViewOptions.Name = "tsmDataGridViewOptions";
-            this.tsmDataGridViewOptions.Size = new System.Drawing.Size(178, 22);
+            this.tsmDataGridViewOptions.Size = new System.Drawing.Size(156, 22);
             this.tsmDataGridViewOptions.Text = "Table";
             // 
             // topLeftButton
@@ -81,7 +81,6 @@
             // 
             // CustomDataGridView
             // 
-            this.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RowTemplate.Height = 24;
             this.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.CustomDataGridView_DataBindingComplete);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CustomDataGridView_Paint);

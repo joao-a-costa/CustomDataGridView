@@ -2,3 +2,5 @@
 /CustomDataGridView.Win/obj
 /packages
 /.vs
+/CustomDataGridView.Lib/bin
+/CustomDataGridView.Lib/obj
