@@ -3,12 +3,13 @@
   <metadata>
     <!-- Package metadata -->
     <id>CustomDataGridView</id>
-    <version>1.0.1</version>
+    <version>1.0.3</version>
     <authors>João Costa</authors>
     <owners>João Costa</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Enhance your WinForms application's tabular data display with CustomDataGridView. This C# library extends the capabilities of the standard DataGridView, offering easy customization and additional features for a more flexible and tailored user experience.</description>
-    <releaseNotes></releaseNotes>
+	<projectUrl>https://github.com/joao-a-costa/CustomDataGridView</projectUrl>
+	<readme>docs\README.md</readme>
     <!-- Additional metadata elements can be added as needed -->
 	<dependencies>
     <group targetFramework=".NETFramework4.7.2">
@@ -20,8 +21,10 @@
   <files>
     <!-- Define files to include in the package -->
     <file src="bin\x86\Release\CustomDataGridView.Lib.dll" target="lib\net472" />
-	<file src="..\README.md" target="" />
-	<file src="..\LICENSE.txt" target="" />
+	<file src="bin\x86\Release\en\CustomDataGridView.Lib.resources.dll" target="lib\net472\en" />
+	<file src="bin\x86\Release\pt\CustomDataGridView.Lib.resources.dll" target="lib\net472\pt" />
+	<file src="..\README.md" target="docs\" />
+	<file src="..\LICENSE.txt" target="docs\" />
     <!-- Additional file elements can be added as needed -->
   </files>
 </package>
