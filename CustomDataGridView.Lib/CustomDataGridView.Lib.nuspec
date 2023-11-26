@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <!-- Package metadata -->
+    <id>CustomDataGridView</id>
+    <version>1.0.1</version>
+    <authors>João Costa</authors>
+    <owners>João Costa</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Enhance your WinForms application's tabular data display with CustomDataGridView. This C# library extends the capabilities of the standard DataGridView, offering easy customization and additional features for a more flexible and tailored user experience.</description>
+    <releaseNotes></releaseNotes>
+    <!-- Additional metadata elements can be added as needed -->
+	<dependencies>
+    <group targetFramework=".NETFramework4.7.2">
+      <!-- Specify dependencies for .NET Framework 4.7.2 -->
+      <!-- Additional dependencies can be added as needed -->
+    </group>
+  </dependencies>
+  </metadata>
+  <files>
+    <!-- Define files to include in the package -->
+    <file src="bin\x86\Release\CustomDataGridView.Lib.dll" target="lib\net472" />
+	<file src="..\README.md" target="" />
+	<file src="..\LICENSE.txt" target="" />
+    <!-- Additional file elements can be added as needed -->
+  </files>
+</package>

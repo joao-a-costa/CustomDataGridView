@@ -4,3 +4,4 @@
 /.vs
 /CustomDataGridView.Lib/bin
 /CustomDataGridView.Lib/obj
+/CustomDataGridView.Lib/nugetPackagePush.cmd
