@@ -120,6 +120,9 @@
   <data name="labelExportToExcel" xml:space="preserve">
     <value>Export to Excel</value>
   </data>
+  <data name="labelResetPreferences" xml:space="preserve">
+    <value>Reset Preferences</value>
+  </data>
   <data name="labelSelectColumns" xml:space="preserve">
     <value>Select Columns</value>
   </data>
