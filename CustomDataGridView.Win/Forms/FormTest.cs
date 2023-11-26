@@ -50,5 +50,12 @@ namespace CustomDataGridView.Win.Forms
         {
             customDataGridView1.SetCurrentCulture(tbCurrentCulture.Text);
         }
+
+        private void cbContextMenuDataGridViewOptionsVisible_CheckedChanged(object sender, EventArgs e)
+        {
+            var checkBox = (CheckBox)sender;
+
+            customDataGridView1.GetType()?.GetProperty(checkBox.Tag.ToString())?.SetValue(customDataGridView1, checkBox.Checked);
+        }
     }
 }

@@ -41,21 +41,21 @@ namespace CustomDataGridView.Lib.Components
         /// </summary>
         public bool ContextMenuSelectColumnsVisible
         {
-            set { SetContextMenuItemVisibility("tsmSelectColumns", value); }
+            set { SetContextMenuItemVisibility(tsmSelectColumns.Name, value); }
         }
         /// <summary>
         /// Sets the visibility of the context menu 'ExportToExcel'
         /// </summary>
         public bool ContextMenuExportToExcelVisible
         {
-            set { SetContextMenuItemVisibility("tsmSelectColumns", value); }
+            set { SetContextMenuItemVisibility(tsmExportToExcel.Name, value); }
         }
         /// <summary>
         /// Sets the visibility of the context menu 'DataGridViewOptions'
         /// </summary>
         public bool ContextMenuDataGridViewOptionsVisible
         {
-            set { SetContextMenuItemVisibility("tsmSelectColumns", value); }
+            set { SetContextMenuItemVisibility(tsmDataGridViewOptions.Name, value); }
         }
 
         #endregion
@@ -274,7 +274,7 @@ namespace CustomDataGridView.Lib.Components
 
                 ConfigureLocalization();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
