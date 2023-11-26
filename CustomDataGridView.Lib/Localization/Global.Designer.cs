@@ -72,6 +72,15 @@ namespace CustomDataGridView.Lib.Localization {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string labelResetPreferences {
+            get {
+                return ResourceManager.GetString("labelResetPreferences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string labelSelectColumns {
             get {
                 return ResourceManager.GetString("labelSelectColumns", resourceCulture);

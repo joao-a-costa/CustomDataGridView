@@ -39,9 +39,12 @@ namespace CustomDataGridView.Lib.Components
         #region "Properties"
 
         /// <summary>
-        /// Create a list to store the selected column names
+        /// Create a list to store the available column names
         /// </summary>
         public List<string> ColumnsAvailable { get; private set; } = new List<string>();
+        /// <summary>
+        /// Create a list to store the selected column names
+        /// </summary>
         public List<string> ColumnsSelected { get; private set; } = new List<string>();
         /// <summary>
         /// Return the wigth of the top left button
@@ -144,6 +147,7 @@ namespace CustomDataGridView.Lib.Components
             tsmSelectColumns.Text = Localization.Global.labelSelectColumns;
             tsmExportToExcel.Text = Localization.Global.labelExportToExcel;
             tsmDataGridViewOptions.Text = Localization.Global.labelTable;
+            tsmResetPreferences.Text = Localization.Global.labelResetPreferences;
         }
 
         /// <summary>
@@ -341,6 +345,17 @@ namespace CustomDataGridView.Lib.Components
         /// Event handler for tsmSelectColumns click
         /// </summary>
         private void tsmSelectColumns_Click(object sender, EventArgs e) => ShowColumnSelectionDialog();
+
+        /// <summary>
+        /// Event handler for TsmResetPreferences click. Resets datagridiview
+        /// </summary>
+        private void TsmResetPreferences_Click(object sender, EventArgs e)
+        {
+            var dataTable = DataSource;
+
+            DataSource = null;
+            DataSource  = dataTable;
+        }
 
         /// <summary>
         /// Event handler for CustomDataGridView Paint

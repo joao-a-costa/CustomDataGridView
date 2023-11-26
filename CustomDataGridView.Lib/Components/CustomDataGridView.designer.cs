@@ -35,6 +35,7 @@
             this.tsmExportToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDataGridViewOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.topLeftButton = new System.Windows.Forms.Button();
+            this.tsmResetPreferences = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
@@ -45,28 +46,29 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmSelectColumns,
             this.tsmExportToExcel,
-            this.tsmDataGridViewOptions});
+            this.tsmDataGridViewOptions,
+            this.tsmResetPreferences});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(157, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(195, 100);
             // 
             // tsmSelectColumns
             // 
             this.tsmSelectColumns.Name = "tsmSelectColumns";
-            this.tsmSelectColumns.Size = new System.Drawing.Size(156, 22);
+            this.tsmSelectColumns.Size = new System.Drawing.Size(194, 24);
             this.tsmSelectColumns.Text = "Select Columns";
             this.tsmSelectColumns.Click += new System.EventHandler(this.tsmSelectColumns_Click);
             // 
             // tsmExportToExcel
             // 
             this.tsmExportToExcel.Name = "tsmExportToExcel";
-            this.tsmExportToExcel.Size = new System.Drawing.Size(156, 22);
+            this.tsmExportToExcel.Size = new System.Drawing.Size(194, 24);
             this.tsmExportToExcel.Text = "Export to excel";
             this.tsmExportToExcel.Visible = false;
             // 
             // tsmDataGridViewOptions
             // 
             this.tsmDataGridViewOptions.Name = "tsmDataGridViewOptions";
-            this.tsmDataGridViewOptions.Size = new System.Drawing.Size(156, 22);
+            this.tsmDataGridViewOptions.Size = new System.Drawing.Size(194, 24);
             this.tsmDataGridViewOptions.Text = "Table";
             // 
             // topLeftButton
@@ -78,6 +80,13 @@
             this.topLeftButton.Text = "...";
             this.topLeftButton.UseVisualStyleBackColor = true;
             this.topLeftButton.Click += new System.EventHandler(this.TopLeftButton_Click);
+            // 
+            // tsmResetPreferences
+            // 
+            this.tsmResetPreferences.Name = "tsmResetPreferences";
+            this.tsmResetPreferences.Size = new System.Drawing.Size(194, 24);
+            this.tsmResetPreferences.Text = "Reset Preferences";
+            this.tsmResetPreferences.Click += TsmResetPreferences_Click;
             // 
             // CustomDataGridView
             // 
@@ -97,5 +106,6 @@
         private System.Windows.Forms.Button topLeftButton;
         private System.Windows.Forms.ToolStripMenuItem tsmExportToExcel;
         private System.Windows.Forms.ToolStripMenuItem tsmDataGridViewOptions;
+        private System.Windows.Forms.ToolStripMenuItem tsmResetPreferences;
     }
 }
