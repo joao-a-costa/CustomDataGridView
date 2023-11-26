@@ -78,6 +78,21 @@
       <DependentUpon>CustomDataGridView.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CustomDataGridViewHelper.cs" />
+    <Compile Include="Localization\Global.pt.Designer.cs">
+      <DependentUpon>Global.pt.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Localization\Global.en.Designer.cs">
+      <DependentUpon>Global.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Localization\Global.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Global.resx</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataGridViewConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -87,6 +102,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Components\CustomDataGridView.resx">
       <DependentUpon>CustomDataGridView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Global.pt.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Global.pt.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Global.en.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Global.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Global.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Global.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

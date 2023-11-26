@@ -3,7 +3,9 @@ using CustomDataGridView.Lib.Helpers;
 using CustomDataGridView.Lib.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace CustomDataGridView.Lib.Components
@@ -39,24 +41,21 @@ namespace CustomDataGridView.Lib.Components
         /// </summary>
         public bool ContextMenuSelectColumnsVisible
         {
-            get { return tsmSelectColumns.Visible; }
-            set { tsmSelectColumns.Visible = value; }
+            set { SetContextMenuItemVisibility("tsmSelectColumns", value); }
         }
         /// <summary>
         /// Sets the visibility of the context menu 'ExportToExcel'
         /// </summary>
         public bool ContextMenuExportToExcelVisible
         {
-            get { return tsmSelectColumns.Visible; }
-            set { tsmSelectColumns.Visible = value; }
+            set { SetContextMenuItemVisibility("tsmSelectColumns", value); }
         }
         /// <summary>
         /// Sets the visibility of the context menu 'DataGridViewOptions'
         /// </summary>
         public bool ContextMenuDataGridViewOptionsVisible
         {
-            get { return tsmSelectColumns.Visible; }
-            set { tsmSelectColumns.Visible = value; }
+            set { SetContextMenuItemVisibility("tsmSelectColumns", value); }
         }
 
         #endregion
@@ -72,6 +71,7 @@ namespace CustomDataGridView.Lib.Components
 
             ConfigureButton();
             ConfigureToolStripenus();
+            ConfigureLocalization();
         }
 
         #endregion
@@ -122,6 +122,16 @@ namespace CustomDataGridView.Lib.Components
         }
 
         /// <summary>
+        /// Set components text based on culture
+        /// </summary>
+        private void ConfigureLocalization()
+        {
+            tsmSelectColumns.Text = Localization.Global.labelSelectColumns;
+            tsmExportToExcel.Text = Localization.Global.labelExportToExcel;
+            tsmDataGridViewOptions.Text = Localization.Global.labelTable;
+        }
+
+        /// <summary>
         /// Refresh the DataGridView to display selected columns
         /// </summary>
         private void RefreshColumns()
@@ -152,6 +162,19 @@ namespace CustomDataGridView.Lib.Components
 
             // Set the button's position
             topLeftButton.Location = new System.Drawing.Point(x, y);
+        }
+
+        /// <summary>
+        /// Sets the visibility of a context menu item based on its name.
+        /// </summary>
+        /// <param name="contextMenuItemName">The name of the context menu item.</param>
+        /// <param name="visible">A boolean value indicating whether the context menu item should be visible.</param>
+        private void SetContextMenuItemVisibility(string contextMenuItemName, bool visible)
+        {
+            var toolStripMenuItem = contextMenuStrip1.Items.Cast<ToolStripMenuItem>().FirstOrDefault(fod => fod.Name == contextMenuItemName);
+
+            if (toolStripMenuItem != null)
+                toolStripMenuItem.Visible = visible;
         }
 
         #endregion
@@ -234,6 +257,27 @@ namespace CustomDataGridView.Lib.Components
                 CustomDataGridViewHelper.ChangeProperty(this, fe.Name,
                     Enum.Parse(GetType().GetProperty(fe.Name).PropertyType, fe.Value.ToString()));
             });
+        }
+
+        /// <summary>
+        /// Sets the current culture for the application.
+        /// </summary>
+        /// <param name="name">The name of the culture to set.</param>
+        /// <param name="useUserOverride">A flag indicating whether to use user overrides for the culture.</param>
+        public void SetCurrentCulture(string name, bool useUserOverride = false)
+        {
+            try
+            {
+                CultureInfo cultureInfo = new CultureInfo(name, useUserOverride);
+                Thread.CurrentThread.CurrentCulture = cultureInfo;
+                Thread.CurrentThread.CurrentUICulture = cultureInfo;
+
+                ConfigureLocalization();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         #endregion

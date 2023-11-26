@@ -35,6 +35,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.customDataGridView1 = new CustomDataGridView.Lib.Components.CustomDataGridView();
+            this.tbCurrentCulture = new System.Windows.Forms.TextBox();
+            this.bSetCurrentCulture = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -47,20 +49,20 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 127);
+            this.panel1.Size = new System.Drawing.Size(800, 141);
             this.panel1.TabIndex = 1;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(131, 0);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Location = new System.Drawing.Point(238, 0);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Size = new System.Drawing.Size(669, 127);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(562, 141);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
@@ -69,28 +71,30 @@
             // 
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox1.Location = new System.Drawing.Point(4, 19);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(661, 104);
+            this.textBox1.Size = new System.Drawing.Size(554, 118);
             this.textBox1.TabIndex = 0;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.bSetCurrentCulture);
+            this.panel2.Controls.Add(this.tbCurrentCulture);
             this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.button1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(131, 127);
+            this.panel2.Size = new System.Drawing.Size(238, 141);
             this.panel2.TabIndex = 3;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(16, 50);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Location = new System.Drawing.Point(124, 15);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 28);
             this.button2.TabIndex = 2;
@@ -101,7 +105,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(16, 15);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 1;
@@ -114,14 +118,33 @@
             this.customDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.customDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.customDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customDataGridView1.Location = new System.Drawing.Point(0, 127);
+            this.customDataGridView1.Location = new System.Drawing.Point(0, 141);
             this.customDataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.customDataGridView1.Name = "customDataGridView1";
             this.customDataGridView1.RowHeadersWidth = 51;
             this.customDataGridView1.RowTemplate.Height = 24;
-            this.customDataGridView1.Size = new System.Drawing.Size(800, 323);
+            this.customDataGridView1.Size = new System.Drawing.Size(800, 309);
             this.customDataGridView1.TabIndex = 0;
             this.customDataGridView1.TopLeftButtonWidth = 33;
+            // 
+            // tbCurrentCulture
+            // 
+            this.tbCurrentCulture.Location = new System.Drawing.Point(16, 86);
+            this.tbCurrentCulture.Name = "tbCurrentCulture";
+            this.tbCurrentCulture.Size = new System.Drawing.Size(208, 22);
+            this.tbCurrentCulture.TabIndex = 1;
+            this.tbCurrentCulture.Text = "en-GB";
+            // 
+            // bSetCurrentCulture
+            // 
+            this.bSetCurrentCulture.Location = new System.Drawing.Point(16, 51);
+            this.bSetCurrentCulture.Margin = new System.Windows.Forms.Padding(4);
+            this.bSetCurrentCulture.Name = "bSetCurrentCulture";
+            this.bSetCurrentCulture.Size = new System.Drawing.Size(208, 28);
+            this.bSetCurrentCulture.TabIndex = 3;
+            this.bSetCurrentCulture.Text = "Set Current Culture";
+            this.bSetCurrentCulture.UseVisualStyleBackColor = true;
+            this.bSetCurrentCulture.Click += new System.EventHandler(this.bSetCurrentCulture_Click);
             // 
             // FormTest
             // 
@@ -140,6 +163,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.customDataGridView1)).EndInit();
             this.ResumeLayout(false);
 
@@ -154,6 +178,8 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button bSetCurrentCulture;
+        private System.Windows.Forms.TextBox tbCurrentCulture;
     }
 }
 
