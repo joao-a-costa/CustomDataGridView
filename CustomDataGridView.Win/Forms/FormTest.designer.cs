@@ -32,11 +32,14 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.cbContextMenuDataGridViewOptionsVisible = new System.Windows.Forms.CheckBox();
+            this.cbContextMenuExportToExcelVisible = new System.Windows.Forms.CheckBox();
+            this.cbContextMenuSelectColumnsVisible = new System.Windows.Forms.CheckBox();
+            this.bSetCurrentCulture = new System.Windows.Forms.Button();
+            this.tbCurrentCulture = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.customDataGridView1 = new CustomDataGridView.Lib.Components.CustomDataGridView();
-            this.tbCurrentCulture = new System.Windows.Forms.TextBox();
-            this.bSetCurrentCulture = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -58,11 +61,11 @@
             // 
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(238, 0);
+            this.groupBox1.Location = new System.Drawing.Point(554, 0);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(562, 141);
+            this.groupBox1.Size = new System.Drawing.Size(246, 141);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
@@ -75,11 +78,14 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(554, 118);
+            this.textBox1.Size = new System.Drawing.Size(238, 118);
             this.textBox1.TabIndex = 0;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.cbContextMenuDataGridViewOptionsVisible);
+            this.panel2.Controls.Add(this.cbContextMenuExportToExcelVisible);
+            this.panel2.Controls.Add(this.cbContextMenuSelectColumnsVisible);
             this.panel2.Controls.Add(this.bSetCurrentCulture);
             this.panel2.Controls.Add(this.tbCurrentCulture);
             this.panel2.Controls.Add(this.button2);
@@ -88,8 +94,67 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(238, 141);
+            this.panel2.Size = new System.Drawing.Size(554, 141);
             this.panel2.TabIndex = 3;
+            // 
+            // cbContextMenuDataGridViewOptionsVisible
+            // 
+            this.cbContextMenuDataGridViewOptionsVisible.AutoSize = true;
+            this.cbContextMenuDataGridViewOptionsVisible.Checked = true;
+            this.cbContextMenuDataGridViewOptionsVisible.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbContextMenuDataGridViewOptionsVisible.Location = new System.Drawing.Point(271, 88);
+            this.cbContextMenuDataGridViewOptionsVisible.Name = "cbContextMenuDataGridViewOptionsVisible";
+            this.cbContextMenuDataGridViewOptionsVisible.Size = new System.Drawing.Size(276, 20);
+            this.cbContextMenuDataGridViewOptionsVisible.TabIndex = 6;
+            this.cbContextMenuDataGridViewOptionsVisible.Tag = "ContextMenuDataGridViewOptionsVisible";
+            this.cbContextMenuDataGridViewOptionsVisible.Text = "ContextMenuDataGridViewOptionsVisible";
+            this.cbContextMenuDataGridViewOptionsVisible.UseVisualStyleBackColor = true;
+            this.cbContextMenuDataGridViewOptionsVisible.CheckedChanged += new System.EventHandler(this.cbContextMenuDataGridViewOptionsVisible_CheckedChanged);
+            // 
+            // cbContextMenuExportToExcelVisible
+            // 
+            this.cbContextMenuExportToExcelVisible.AutoSize = true;
+            this.cbContextMenuExportToExcelVisible.Location = new System.Drawing.Point(271, 56);
+            this.cbContextMenuExportToExcelVisible.Name = "cbContextMenuExportToExcelVisible";
+            this.cbContextMenuExportToExcelVisible.Size = new System.Drawing.Size(235, 20);
+            this.cbContextMenuExportToExcelVisible.TabIndex = 5;
+            this.cbContextMenuExportToExcelVisible.Tag = "ContextMenuExportToExcelVisible";
+            this.cbContextMenuExportToExcelVisible.Text = "ContextMenuExportToExcelVisible";
+            this.cbContextMenuExportToExcelVisible.UseVisualStyleBackColor = true;
+            this.cbContextMenuExportToExcelVisible.CheckedChanged += new System.EventHandler(this.cbContextMenuDataGridViewOptionsVisible_CheckedChanged);
+            // 
+            // cbContextMenuSelectColumnsVisible
+            // 
+            this.cbContextMenuSelectColumnsVisible.AutoSize = true;
+            this.cbContextMenuSelectColumnsVisible.Checked = true;
+            this.cbContextMenuSelectColumnsVisible.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbContextMenuSelectColumnsVisible.Location = new System.Drawing.Point(271, 20);
+            this.cbContextMenuSelectColumnsVisible.Name = "cbContextMenuSelectColumnsVisible";
+            this.cbContextMenuSelectColumnsVisible.Size = new System.Drawing.Size(237, 20);
+            this.cbContextMenuSelectColumnsVisible.TabIndex = 4;
+            this.cbContextMenuSelectColumnsVisible.Tag = "ContextMenuSelectColumnsVisible";
+            this.cbContextMenuSelectColumnsVisible.Text = "ContextMenuSelectColumnsVisible";
+            this.cbContextMenuSelectColumnsVisible.UseVisualStyleBackColor = true;
+            this.cbContextMenuSelectColumnsVisible.CheckedChanged += new System.EventHandler(this.cbContextMenuDataGridViewOptionsVisible_CheckedChanged);
+            // 
+            // bSetCurrentCulture
+            // 
+            this.bSetCurrentCulture.Location = new System.Drawing.Point(16, 51);
+            this.bSetCurrentCulture.Margin = new System.Windows.Forms.Padding(4);
+            this.bSetCurrentCulture.Name = "bSetCurrentCulture";
+            this.bSetCurrentCulture.Size = new System.Drawing.Size(208, 28);
+            this.bSetCurrentCulture.TabIndex = 3;
+            this.bSetCurrentCulture.Text = "Set Current Culture";
+            this.bSetCurrentCulture.UseVisualStyleBackColor = true;
+            this.bSetCurrentCulture.Click += new System.EventHandler(this.bSetCurrentCulture_Click);
+            // 
+            // tbCurrentCulture
+            // 
+            this.tbCurrentCulture.Location = new System.Drawing.Point(16, 86);
+            this.tbCurrentCulture.Name = "tbCurrentCulture";
+            this.tbCurrentCulture.Size = new System.Drawing.Size(208, 22);
+            this.tbCurrentCulture.TabIndex = 1;
+            this.tbCurrentCulture.Text = "en-GB";
             // 
             // button2
             // 
@@ -127,25 +192,6 @@
             this.customDataGridView1.TabIndex = 0;
             this.customDataGridView1.TopLeftButtonWidth = 33;
             // 
-            // tbCurrentCulture
-            // 
-            this.tbCurrentCulture.Location = new System.Drawing.Point(16, 86);
-            this.tbCurrentCulture.Name = "tbCurrentCulture";
-            this.tbCurrentCulture.Size = new System.Drawing.Size(208, 22);
-            this.tbCurrentCulture.TabIndex = 1;
-            this.tbCurrentCulture.Text = "en-GB";
-            // 
-            // bSetCurrentCulture
-            // 
-            this.bSetCurrentCulture.Location = new System.Drawing.Point(16, 51);
-            this.bSetCurrentCulture.Margin = new System.Windows.Forms.Padding(4);
-            this.bSetCurrentCulture.Name = "bSetCurrentCulture";
-            this.bSetCurrentCulture.Size = new System.Drawing.Size(208, 28);
-            this.bSetCurrentCulture.TabIndex = 3;
-            this.bSetCurrentCulture.Text = "Set Current Culture";
-            this.bSetCurrentCulture.UseVisualStyleBackColor = true;
-            this.bSetCurrentCulture.Click += new System.EventHandler(this.bSetCurrentCulture_Click);
-            // 
             // FormTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -180,6 +226,9 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button bSetCurrentCulture;
         private System.Windows.Forms.TextBox tbCurrentCulture;
+        private System.Windows.Forms.CheckBox cbContextMenuSelectColumnsVisible;
+        private System.Windows.Forms.CheckBox cbContextMenuExportToExcelVisible;
+        private System.Windows.Forms.CheckBox cbContextMenuDataGridViewOptionsVisible;
     }
 }
 
