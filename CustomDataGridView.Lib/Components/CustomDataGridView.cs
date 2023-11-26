@@ -34,6 +34,30 @@ namespace CustomDataGridView.Lib.Components
             get { return topLeftButton.Width; }
             set { topLeftButton.Width = value; }
         }
+        /// <summary>
+        /// Sets the visibility of the context menu 'SelectColumns'
+        /// </summary>
+        public bool ContextMenuSelectColumnsVisible
+        {
+            get { return tsmSelectColumns.Visible; }
+            set { tsmSelectColumns.Visible = value; }
+        }
+        /// <summary>
+        /// Sets the visibility of the context menu 'ExportToExcel'
+        /// </summary>
+        public bool ContextMenuExportToExcelVisible
+        {
+            get { return tsmSelectColumns.Visible; }
+            set { tsmSelectColumns.Visible = value; }
+        }
+        /// <summary>
+        /// Sets the visibility of the context menu 'DataGridViewOptions'
+        /// </summary>
+        public bool ContextMenuDataGridViewOptionsVisible
+        {
+            get { return tsmSelectColumns.Visible; }
+            set { tsmSelectColumns.Visible = value; }
+        }
 
         #endregion
 
