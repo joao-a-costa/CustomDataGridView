@@ -45,5 +45,10 @@ namespace CustomDataGridView.Win.Forms
             //customDataGridView1.Columns[0].Width
             customDataGridView1.SetDataGridViewSettings(JsonConvert.DeserializeObject<DataGridViewConfiguration>(textBox1.Text));
         }
+
+        private void bSetCurrentCulture_Click(object sender, EventArgs e)
+        {
+            customDataGridView1.SetCurrentCulture(tbCurrentCulture.Text);
+        }
     }
 }
