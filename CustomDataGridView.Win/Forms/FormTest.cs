@@ -37,7 +37,7 @@ namespace CustomDataGridView.Win.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            textBox1.Text = Newtonsoft.Json.JsonConvert.SerializeObject(customDataGridView1.GetDataGridViewSettings(), Formatting.Indented);
+            textBox1.Text = JsonConvert.SerializeObject(customDataGridView1.GetDataGridViewSettings(), Formatting.Indented);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -56,6 +56,11 @@ namespace CustomDataGridView.Win.Forms
             var checkBox = (CheckBox)sender;
 
             customDataGridView1.GetType()?.GetProperty(checkBox.Tag.ToString())?.SetValue(customDataGridView1, checkBox.Checked);
+        }
+
+        private void customDataGridView1_UserSelectedColumns(object sender, EventArgs e)
+        {
+            MessageBox.Show("Columns were selected");
         }
     }
 }

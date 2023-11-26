@@ -21,6 +21,21 @@ namespace CustomDataGridView.Lib.Components
 
         #endregion
 
+        #region "Events"
+
+        /// <summary>
+        /// Represents the method signature for the UserSelectedColumns event.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        public delegate void UserSelectedColumnsEventHandler(object sender, EventArgs e);
+        /// <summary>
+        /// Event that is raised when the user selects columns.
+        /// </summary>
+        public event UserSelectedColumnsEventHandler UserSelectedColumns;
+
+        #endregion
+
         #region "Properties"
 
         /// <summary>
@@ -193,6 +208,7 @@ namespace CustomDataGridView.Lib.Components
                 {
                     ColumnsSelected = columnSelectionForm.SelectedColumns;
                     RefreshColumns();
+                    OnUserSelectedColumns(new EventArgs());
                 }
             }
         }
@@ -277,6 +293,24 @@ namespace CustomDataGridView.Lib.Components
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        #endregion
+
+        #region "Protected"
+
+        /// <summary>
+        /// Raises the UserSelectedColumns event.
+        /// </summary>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        protected virtual void OnUserSelectedColumns(EventArgs e)
+        {
+            // Check if any subscribers have been attached to the event
+            if (UserSelectedColumns != null)
+            {
+                // Invoke the event
+                UserSelectedColumns(this, e);
             }
         }
 

@@ -191,6 +191,7 @@
             this.customDataGridView1.Size = new System.Drawing.Size(800, 309);
             this.customDataGridView1.TabIndex = 0;
             this.customDataGridView1.TopLeftButtonWidth = 33;
+            this.customDataGridView1.UserSelectedColumns += new CustomDataGridView.Lib.Components.CustomDataGridView.UserSelectedColumnsEventHandler(this.customDataGridView1_UserSelectedColumns);
             // 
             // FormTest
             // 
