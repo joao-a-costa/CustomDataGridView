@@ -33,6 +33,16 @@ namespace CustomDataGridView.Lib.Components
         /// Event that is raised when the user selects columns.
         /// </summary>
         public event UserSelectedColumnsEventHandler UserSelectedColumns;
+        /// <summary>
+        /// Represents the method signature for the UserResetColumns event.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        public delegate void UserResetColumnsEventHandler(object sender, EventArgs e);
+        /// <summary>
+        /// Event that is raised when the user reset columns.
+        /// </summary>
+        public event UserResetColumnsEventHandler UserResetColumns;
 
         #endregion
 
@@ -168,6 +178,16 @@ namespace CustomDataGridView.Lib.Components
                     column.DisplayIndex = ColumnsSelected.IndexOf(column.Name);
                 }
             }
+        }
+
+        /// <summary>
+        /// Refresh the DataGridView available columns
+        /// </summary>
+        public void RefreshColumnsAvailable()
+        {
+            ColumnsAvailable = Columns.Cast<DataGridViewColumn>().Select(s => s.Name).ToList();
+
+            topLeftButton.Visible = ColumnsAvailable.Count > 0;
         }
 
         /// <summary>
@@ -318,6 +338,20 @@ namespace CustomDataGridView.Lib.Components
             }
         }
 
+        /// <summary>
+        /// Raises the UserResetColumns event.
+        /// </summary>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        protected virtual void OnUserResetColumns(EventArgs e)
+        {
+            // Check if any subscribers have been attached to the event
+            if (UserResetColumns != null)
+            {
+                // Invoke the event
+                UserResetColumns(this, e);
+            }
+        }
+
         #endregion
 
         #region "Events"
@@ -347,14 +381,16 @@ namespace CustomDataGridView.Lib.Components
         private void tsmSelectColumns_Click(object sender, EventArgs e) => ShowColumnSelectionDialog();
 
         /// <summary>
-        /// Event handler for TsmResetPreferences click. Resets datagridiview
+        /// Event handler for tsmResetPreferences click. Resets datagridiview
         /// </summary>
-        private void TsmResetPreferences_Click(object sender, EventArgs e)
+        private void tsmResetPreferences_Click(object sender, EventArgs e)
         {
             var dataTable = DataSource;
 
             DataSource = null;
-            DataSource  = dataTable;
+            DataSource = dataTable;
+
+            OnUserResetColumns(new EventArgs());
         }
 
         /// <summary>
@@ -367,9 +403,15 @@ namespace CustomDataGridView.Lib.Components
         /// </summary>
         private void CustomDataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            ColumnsAvailable = Columns.Cast<DataGridViewColumn>().Select(s => s.Name).ToList();
+            RefreshColumnsAvailable();
+        }
 
-            topLeftButton.Visible = ColumnsAvailable.Count > 0;
+        /// <summary>
+        /// Event handler for CustomDataGridView for ColumnAdded or ColumnRemoved
+        /// </summary>
+        private void CustomDataGridView_Changed(object sender, DataGridViewColumnEventArgs e)
+        {
+            RefreshColumnsAvailable();
         }
 
         #endregion
