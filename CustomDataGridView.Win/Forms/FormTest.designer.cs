@@ -192,6 +192,7 @@
             this.customDataGridView1.TabIndex = 0;
             this.customDataGridView1.TopLeftButtonWidth = 33;
             this.customDataGridView1.UserSelectedColumns += new CustomDataGridView.Lib.Components.CustomDataGridView.UserSelectedColumnsEventHandler(this.customDataGridView1_UserSelectedColumns);
+            this.customDataGridView1.UserResetColumns += new CustomDataGridView.Lib.Components.CustomDataGridView.UserResetColumnsEventHandler(this.customDataGridView1_UserResetColumns);
             // 
             // FormTest
             // 
@@ -204,7 +205,6 @@
             this.Name = "FormTest";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Sample Form";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
