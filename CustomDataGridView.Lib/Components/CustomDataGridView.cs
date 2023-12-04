@@ -216,6 +216,37 @@ namespace CustomDataGridView.Lib.Components
                 toolStripMenuItem.Visible = visible;
         }
 
+        /// <summary>
+        /// Moves the focus to the next cell based on the current cell position.
+        /// </summary>
+        /// <param name="currentRowIndex">The index of the current row.</param>
+        /// <param name="currentColumnIndex">The index of the current column.</param>
+        private void MoveToNextCell(int currentRowIndex, int currentColumnIndex)
+        {
+            int nextRowIndex = currentRowIndex;
+            int nextColumnIndex = currentColumnIndex + 1;
+
+            // Check if the next column exists
+            if (nextColumnIndex >= Columns.Count)
+            {
+                // Move to the first column of the next row
+                nextColumnIndex = 0;
+                nextRowIndex++;
+            }
+
+            // Check if the next row exists
+            if (nextRowIndex < Rows.Count)
+            {
+                // Move to the next cell
+                CurrentCell = this[nextColumnIndex, nextRowIndex];
+            }
+            else
+            {
+                // No next cell, end editing
+                EndEdit();
+            }
+        }
+
         #endregion
 
         #region "Public"
@@ -350,6 +381,29 @@ namespace CustomDataGridView.Lib.Components
                 // Invoke the event
                 UserResetColumns(this, e);
             }
+        }
+
+        /// <summary>
+        /// Overrides the ProcessCmdKey method to handle specific key presses.
+        /// </summary>
+        /// <param name="msg">A <see cref="Message"/>, passed by reference, that represents the window message to process.</param>
+        /// <param name="keyData">One of the <see cref="Keys"/> values that represents the key to process.</param>
+        /// <returns>true if the key was processed by the control; otherwise, false.</returns>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter || keyData == Keys.Tab)
+            {
+                // Handle the key press here
+                int currentRowIndex = CurrentCell.RowIndex;
+                int currentColumnIndex = CurrentCell.ColumnIndex;
+
+                MoveToNextCell(currentRowIndex, currentColumnIndex);
+
+                // Indicate that the key press has been handled
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         #endregion
