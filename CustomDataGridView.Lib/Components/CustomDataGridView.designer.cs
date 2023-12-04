@@ -86,7 +86,7 @@
             this.tsmResetPreferences.Name = "tsmResetPreferences";
             this.tsmResetPreferences.Size = new System.Drawing.Size(194, 24);
             this.tsmResetPreferences.Text = "Reset Preferences";
-            this.tsmResetPreferences.Click += TsmResetPreferences_Click;
+            this.tsmResetPreferences.Click += tsmResetPreferences_Click;
             // 
             // CustomDataGridView
             // 
