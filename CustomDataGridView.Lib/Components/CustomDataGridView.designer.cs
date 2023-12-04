@@ -34,8 +34,8 @@
             this.tsmSelectColumns = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmExportToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmDataGridViewOptions = new System.Windows.Forms.ToolStripMenuItem();
-            this.topLeftButton = new System.Windows.Forms.Button();
             this.tsmResetPreferences = new System.Windows.Forms.ToolStripMenuItem();
+            this.topLeftButton = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
@@ -71,6 +71,13 @@
             this.tsmDataGridViewOptions.Size = new System.Drawing.Size(194, 24);
             this.tsmDataGridViewOptions.Text = "Table";
             // 
+            // tsmResetPreferences
+            // 
+            this.tsmResetPreferences.Name = "tsmResetPreferences";
+            this.tsmResetPreferences.Size = new System.Drawing.Size(194, 24);
+            this.tsmResetPreferences.Text = "Reset Preferences";
+            this.tsmResetPreferences.Click += new System.EventHandler(this.tsmResetPreferences_Click);
+            // 
             // topLeftButton
             // 
             this.topLeftButton.Location = new System.Drawing.Point(0, 0);
@@ -81,16 +88,11 @@
             this.topLeftButton.UseVisualStyleBackColor = true;
             this.topLeftButton.Click += new System.EventHandler(this.TopLeftButton_Click);
             // 
-            // tsmResetPreferences
-            // 
-            this.tsmResetPreferences.Name = "tsmResetPreferences";
-            this.tsmResetPreferences.Size = new System.Drawing.Size(194, 24);
-            this.tsmResetPreferences.Text = "Reset Preferences";
-            this.tsmResetPreferences.Click += tsmResetPreferences_Click;
-            // 
             // CustomDataGridView
             // 
             this.RowTemplate.Height = 24;
+            this.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.CustomDataGridView_Changed);
+            this.ColumnRemoved += new System.Windows.Forms.DataGridViewColumnEventHandler(this.CustomDataGridView_Changed);
             this.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.CustomDataGridView_DataBindingComplete);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CustomDataGridView_Paint);
             this.contextMenuStrip1.ResumeLayout(false);
