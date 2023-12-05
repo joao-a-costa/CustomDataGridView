@@ -178,6 +178,7 @@ namespace CustomDataGridView.Lib.Components
                     column.DisplayIndex = ColumnsSelected.IndexOf(column.Name);
                 }
             }
+            Refresh();
         }
 
         /// <summary>
@@ -223,27 +224,34 @@ namespace CustomDataGridView.Lib.Components
         /// <param name="currentColumnIndex">The index of the current column.</param>
         private void MoveToNextCell(int currentRowIndex, int currentColumnIndex)
         {
-            int nextRowIndex = currentRowIndex;
-            int nextColumnIndex = currentColumnIndex + 1;
+            try
+            {
+                int nextRowIndex = currentRowIndex;
+                int nextColumnIndex = currentColumnIndex + 1;
 
-            // Check if the next column exists
-            if (nextColumnIndex >= Columns.Count)
-            {
-                // Move to the first column of the next row
-                nextColumnIndex = 0;
-                nextRowIndex++;
-            }
+                // Check if the next column exists
+                if (nextColumnIndex >= Columns.Count)
+                {
+                    // Move to the first column of the next row
+                    nextColumnIndex = 0;
+                    nextRowIndex++;
+                }
 
-            // Check if the next row exists
-            if (nextRowIndex < Rows.Count)
-            {
-                // Move to the next cell
-                CurrentCell = this[nextColumnIndex, nextRowIndex];
+                // Check if the next row exists
+                if (nextRowIndex < Rows.Count)
+                {
+                    // Move to the next cell
+                    CurrentCell = this[nextColumnIndex, nextRowIndex];
+                }
+                else
+                {
+                    // No next cell, end editing
+                    EndEdit();
+                }
             }
-            else
+            catch(Exception ex)
             {
-                // No next cell, end editing
-                EndEdit();
+
             }
         }
 
