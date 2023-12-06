@@ -265,7 +265,7 @@ namespace CustomDataGridView.Lib.Components
         public void ShowColumnSelectionDialog()
         {
             using (var columnSelectionForm = new ColumnSelectionForm(ColumnsAvailable,
-                Columns.Cast<DataGridViewColumn>().Where(w => w.Visible).Select(s => s.Name).ToList()))
+                Columns.Cast<DataGridViewColumn>().Where(w => w.Visible).OrderBy(ob => ob.DisplayIndex).Select(s => s.Name).ToList()))
             {
                 if (columnSelectionForm.ShowDialog() == DialogResult.OK)
                 {
@@ -290,7 +290,8 @@ namespace CustomDataGridView.Lib.Components
                 dataGridViewConfiguration.Columns.Add(new DataGridViewConfigurationColumn
                 {
                     ColumnName = fe.Name,
-                    Width = columnFound.Width
+                    Width = columnFound.Width,
+                    DisplayIndex = columnFound.DisplayIndex
                 });
             });
 
@@ -322,13 +323,17 @@ namespace CustomDataGridView.Lib.Components
                 }
                 else
                     fe.Visible = false;
+                fe.DisplayIndex = columnFound.DisplayIndex;
             });
             dataGridViewConfiguration.Columns.ForEach(fe =>
             {
                 var columnFound = Columns.Cast<DataGridViewColumn>().FirstOrDefault(fod => fod.Name == fe.ColumnName);
 
                 if (columnFound != null)
+                {
                     columnFound.Width = fe.Width;
+                    columnFound.DisplayIndex = fe.DisplayIndex;
+                }
             });
 
             dataGridViewConfiguration.ExtraProperties.ForEach(fe =>

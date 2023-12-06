@@ -18,6 +18,7 @@ namespace CustomDataGridView.Lib.Models
     {
         public string ColumnName { get; set; }
         public int Width { get; set; }
+        public int DisplayIndex { get; set; }
     }
 
     /// <summary>
