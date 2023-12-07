@@ -39,6 +39,7 @@
             this.tbCurrentCulture = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.cbTopLeftButtonVisible = new System.Windows.Forms.CheckBox();
             this.customDataGridView1 = new CustomDataGridView.Lib.Components.CustomDataGridView();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -54,7 +55,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 141);
+            this.panel1.Size = new System.Drawing.Size(800, 185);
             this.panel1.TabIndex = 1;
             // 
             // groupBox1
@@ -65,7 +66,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(246, 141);
+            this.groupBox1.Size = new System.Drawing.Size(246, 185);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
@@ -78,11 +79,12 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(238, 118);
+            this.textBox1.Size = new System.Drawing.Size(238, 162);
             this.textBox1.TabIndex = 0;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.cbTopLeftButtonVisible);
             this.panel2.Controls.Add(this.cbContextMenuDataGridViewOptionsVisible);
             this.panel2.Controls.Add(this.cbContextMenuExportToExcelVisible);
             this.panel2.Controls.Add(this.cbContextMenuSelectColumnsVisible);
@@ -94,7 +96,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(554, 141);
+            this.panel2.Size = new System.Drawing.Size(554, 185);
             this.panel2.TabIndex = 3;
             // 
             // cbContextMenuDataGridViewOptionsVisible
@@ -178,18 +180,33 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // cbTopLeftButtonVisible
+            // 
+            this.cbTopLeftButtonVisible.AutoSize = true;
+            this.cbTopLeftButtonVisible.Checked = true;
+            this.cbTopLeftButtonVisible.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbTopLeftButtonVisible.Location = new System.Drawing.Point(271, 114);
+            this.cbTopLeftButtonVisible.Name = "cbTopLeftButtonVisible";
+            this.cbTopLeftButtonVisible.Size = new System.Drawing.Size(153, 20);
+            this.cbTopLeftButtonVisible.TabIndex = 7;
+            this.cbTopLeftButtonVisible.Tag = "TopLeftButtonVisible";
+            this.cbTopLeftButtonVisible.Text = "TopLeftButtonVisible";
+            this.cbTopLeftButtonVisible.UseVisualStyleBackColor = true;
+            this.cbTopLeftButtonVisible.CheckedChanged += new System.EventHandler(this.cbTopLeftButtonVisible_CheckedChanged);
+            // 
             // customDataGridView1
             // 
             this.customDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.customDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.customDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customDataGridView1.Location = new System.Drawing.Point(0, 141);
+            this.customDataGridView1.Location = new System.Drawing.Point(0, 185);
             this.customDataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.customDataGridView1.Name = "customDataGridView1";
             this.customDataGridView1.RowHeadersWidth = 51;
             this.customDataGridView1.RowTemplate.Height = 24;
-            this.customDataGridView1.Size = new System.Drawing.Size(800, 309);
+            this.customDataGridView1.Size = new System.Drawing.Size(800, 265);
             this.customDataGridView1.TabIndex = 0;
+            this.customDataGridView1.TopLeftButtonVisible = false;
             this.customDataGridView1.TopLeftButtonWidth = 33;
             this.customDataGridView1.UserSelectedColumns += new CustomDataGridView.Lib.Components.CustomDataGridView.UserSelectedColumnsEventHandler(this.customDataGridView1_UserSelectedColumns);
             this.customDataGridView1.UserResetColumns += new CustomDataGridView.Lib.Components.CustomDataGridView.UserResetColumnsEventHandler(this.customDataGridView1_UserResetColumns);
@@ -230,6 +247,7 @@
         private System.Windows.Forms.CheckBox cbContextMenuSelectColumnsVisible;
         private System.Windows.Forms.CheckBox cbContextMenuExportToExcelVisible;
         private System.Windows.Forms.CheckBox cbContextMenuDataGridViewOptionsVisible;
+        private System.Windows.Forms.CheckBox cbTopLeftButtonVisible;
     }
 }
 

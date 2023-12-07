@@ -108,5 +108,10 @@ namespace CustomDataGridView.Win.Forms
         {
             MessageBox.Show(_labelColumnsReset);
         }
+
+        private void cbTopLeftButtonVisible_CheckedChanged(object sender, EventArgs e)
+        {
+            customDataGridView1.TopLeftButtonVisible = cbTopLeftButtonVisible.Checked;
+        }
     }
 }
