@@ -20,9 +20,22 @@
   </metadata>
   <files>
     <!-- Define files to include in the package -->
+	<!--
     <file src="bin\x86\Release\CustomDataGridView.Lib.dll" target="lib\net472" />
 	<file src="bin\x86\Release\en\CustomDataGridView.Lib.resources.dll" target="lib\net472\en" />
 	<file src="bin\x86\Release\pt\CustomDataGridView.Lib.resources.dll" target="lib\net472\pt" />
+	-->
+	
+	<!-- AnyCPU version -->
+    <file src="bin\Release\CustomDataGridView.Lib.dll" target="lib\net472" />
+    <file src="bin\Release\en\CustomDataGridView.Lib.resources.dll" target="lib\net472\en" />
+    <file src="bin\Release\pt\CustomDataGridView.Lib.resources.dll" target="lib\net472\pt" />
+
+    <!-- x86 version -->
+    <file src="bin\x86\Release\CustomDataGridView.Lib.dll" target="lib\net472\x86" />
+    <file src="bin\x86\Release\en\CustomDataGridView.Lib.resources.dll" target="lib\net472\x86\en" />
+    <file src="bin\x86\Release\pt\CustomDataGridView.Lib.resources.dll" target="lib\net472\x86\pt" />
+	
 	<file src="..\README.md" target="docs\" />
 	<file src="..\LICENSE.txt" target="docs\" />
     <!-- Additional file elements can be added as needed -->
