@@ -65,6 +65,14 @@ namespace CustomDataGridView.Lib.Components
             set { topLeftButton.Width = value; }
         }
         /// <summary>
+        /// Gets or sets the visibility of the top left button
+        /// </summary>
+        public bool TopLeftButtonVisible
+        {
+            get { return topLeftButton.Visible; }
+            set { topLeftButton.Visible = value; }
+        }
+        /// <summary>
         /// Sets the visibility of the context menu 'SelectColumns'
         /// </summary>
         public bool ContextMenuSelectColumnsVisible
@@ -202,6 +210,7 @@ namespace CustomDataGridView.Lib.Components
 
             // Set the button's position
             topLeftButton.Location = new System.Drawing.Point(x, y);
+            topLeftButton.Visible = TopLeftButtonVisible;
         }
 
         /// <summary>
