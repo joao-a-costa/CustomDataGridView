@@ -109,6 +109,11 @@ namespace CustomDataGridView.Win.Forms
             MessageBox.Show(_labelColumnsReset);
         }
 
+        /// <summary>
+        /// Handles the CheckedChanged event of the cbTopLeftButtonVisible control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbTopLeftButtonVisible_CheckedChanged(object sender, EventArgs e)
         {
             customDataGridView1.TopLeftButtonVisible = cbTopLeftButtonVisible.Checked;

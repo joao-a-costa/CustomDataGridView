@@ -21,6 +21,15 @@ namespace CustomDataGridView.Lib.Components
 
         #endregion
 
+        #region "Members"
+
+        /// <summary>
+        /// Default visibility of top left button
+        /// </summary>
+        private bool topLeftButtonVisible = true;
+
+        #endregion
+
         #region "Events"
 
         /// <summary>
@@ -70,7 +79,7 @@ namespace CustomDataGridView.Lib.Components
         public bool TopLeftButtonVisible
         {
             get { return topLeftButton.Visible; }
-            set { topLeftButton.Visible = value; }
+            set { topLeftButtonVisible = value; topLeftButton.Visible = topLeftButtonVisible; }
         }
         /// <summary>
         /// Sets the visibility of the context menu 'SelectColumns'
@@ -122,7 +131,6 @@ namespace CustomDataGridView.Lib.Components
             // Create a button for the TopLeftHeaderCell
             topLeftButton.Height = ColumnHeadersHeight;
             topLeftButton.Width = _topLeftButtonWidth;
-            topLeftButton.Visible = false;
 
             // Add the button to the DataGridView's TopLeftHeaderCell
             Controls.Add(topLeftButton);
@@ -196,7 +204,7 @@ namespace CustomDataGridView.Lib.Components
         {
             ColumnsAvailable = Columns.Cast<DataGridViewColumn>().Select(s => s.Name).ToList();
 
-            topLeftButton.Visible = ColumnsAvailable.Count > 0;
+            topLeftButton.Visible = topLeftButton.Visible && ColumnsAvailable.Count > 0;
         }
 
         /// <summary>
@@ -210,7 +218,7 @@ namespace CustomDataGridView.Lib.Components
 
             // Set the button's position
             topLeftButton.Location = new System.Drawing.Point(x, y);
-            topLeftButton.Visible = TopLeftButtonVisible;
+            topLeftButton.Visible = topLeftButtonVisible;
         }
 
         /// <summary>

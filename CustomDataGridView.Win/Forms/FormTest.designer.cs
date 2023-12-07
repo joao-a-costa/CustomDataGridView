@@ -206,7 +206,6 @@
             this.customDataGridView1.RowTemplate.Height = 24;
             this.customDataGridView1.Size = new System.Drawing.Size(800, 265);
             this.customDataGridView1.TabIndex = 0;
-            this.customDataGridView1.TopLeftButtonVisible = false;
             this.customDataGridView1.TopLeftButtonWidth = 33;
             this.customDataGridView1.UserSelectedColumns += new CustomDataGridView.Lib.Components.CustomDataGridView.UserSelectedColumnsEventHandler(this.customDataGridView1_UserSelectedColumns);
             this.customDataGridView1.UserResetColumns += new CustomDataGridView.Lib.Components.CustomDataGridView.UserResetColumnsEventHandler(this.customDataGridView1_UserResetColumns);
