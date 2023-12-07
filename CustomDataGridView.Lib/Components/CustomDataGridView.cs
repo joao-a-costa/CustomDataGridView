@@ -249,10 +249,7 @@ namespace CustomDataGridView.Lib.Components
                     EndEdit();
                 }
             }
-            catch(Exception ex)
-            {
-
-            }
+            catch(Exception) { }
         }
 
         #endregion
