@@ -334,10 +334,10 @@ namespace CustomDataGridView.Lib.Components
                 {
                     fe.Width = columnFound.Width;
                     fe.Visible = true;
+                    fe.DisplayIndex = columnFound.DisplayIndex;
                 }
                 else
                     fe.Visible = false;
-                fe.DisplayIndex = columnFound.DisplayIndex;
             });
             dataGridViewConfiguration.Columns.ForEach(fe =>
             {
