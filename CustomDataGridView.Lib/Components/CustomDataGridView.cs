@@ -102,6 +102,10 @@ namespace CustomDataGridView.Lib.Components
         {
             set { SetContextMenuItemVisibility(tsmDataGridViewOptions.Name, value); }
         }
+        /// <summary>
+        /// Default DataGridViewConfiguration
+        /// </summary>
+        public DataGridViewConfiguration DefaultDataGridViewConfiguration { get; set; }
 
         #endregion
 
