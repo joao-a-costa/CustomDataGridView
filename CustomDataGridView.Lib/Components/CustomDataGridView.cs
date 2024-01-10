@@ -308,8 +308,11 @@ namespace CustomDataGridView.Lib.Components
                 dataGridViewConfiguration.Columns.Add(new DataGridViewConfigurationColumn
                 {
                     ColumnName = fe.Name,
+                    HeaderText = fe.HeaderText,
                     Width = columnFound.Width,
-                    DisplayIndex = columnFound.DisplayIndex
+                    DisplayIndex = columnFound.DisplayIndex,
+                    Visible = fe.Visible,
+                    ReadOnly = fe.ReadOnly
                 });
             });
 
@@ -328,7 +331,7 @@ namespace CustomDataGridView.Lib.Components
         /// <summary>
         /// Method to set DataGridView settings from a configuration object
         /// </summary>
-        public void SetDataGridViewSettings(DataGridViewConfiguration dataGridViewConfiguration)
+        public void SetDataGridViewSettings(DataGridViewConfiguration dataGridViewConfiguration, bool setColumnsNotFoundVisible = true)
         {
             Columns.Cast<DataGridViewColumn>().ToList().ForEach(fe =>
             {
@@ -336,12 +339,19 @@ namespace CustomDataGridView.Lib.Components
 
                 if (columnFound != null)
                 {
-                    fe.Width = columnFound.Width;
-                    fe.Visible = true;
-                    fe.DisplayIndex = columnFound.DisplayIndex;
+                    fe.Name = columnFound.ColumnName;
+                    fe.HeaderText = columnFound.HeaderText;
+                    fe.Visible = columnFound.Visible;
+                    fe.DefaultCellStyle.Alignment = columnFound.Aligment;
+                    fe.ReadOnly = columnFound.ReadOnly;
+                    if (columnFound.Width.HasValue)
+                        fe.Width = columnFound.Width.Value;
+                    if (columnFound.DisplayIndex.HasValue)
+                        fe.DisplayIndex = columnFound.DisplayIndex.Value;
+
                 }
                 else
-                    fe.Visible = false;
+                    fe.Visible = setColumnsNotFoundVisible;
             });
             dataGridViewConfiguration.Columns.ForEach(fe =>
             {
@@ -349,8 +359,15 @@ namespace CustomDataGridView.Lib.Components
 
                 if (columnFound != null)
                 {
-                    columnFound.Width = fe.Width;
-                    columnFound.DisplayIndex = fe.DisplayIndex;
+                    columnFound.Name = fe.ColumnName;
+                    columnFound.HeaderText = fe.HeaderText;
+                    columnFound.Visible = fe.Visible;
+                    columnFound.ReadOnly = fe.ReadOnly;
+                    columnFound.DefaultCellStyle.Alignment = fe.Aligment;
+                    if (fe.Width.HasValue)
+                        columnFound.Width = fe.Width.Value;
+                    if (fe.DisplayIndex.HasValue)
+                        columnFound.DisplayIndex = fe.DisplayIndex.Value;
                 }
             });
 
@@ -470,10 +487,7 @@ namespace CustomDataGridView.Lib.Components
         /// </summary>
         private void tsmResetPreferences_Click(object sender, EventArgs e)
         {
-            var dataTable = DataSource;
-
-            DataSource = null;
-            DataSource = dataTable;
+            SetDataGridViewSettings(DefaultDataGridViewConfiguration);
 
             OnUserResetColumns(new EventArgs());
         }

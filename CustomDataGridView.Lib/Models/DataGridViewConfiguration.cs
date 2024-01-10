@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace CustomDataGridView.Lib.Models
 {
@@ -17,8 +18,12 @@ namespace CustomDataGridView.Lib.Models
     public class DataGridViewConfigurationColumn
     {
         public string ColumnName { get; set; }
-        public int Width { get; set; }
-        public int DisplayIndex { get; set; }
+        public string HeaderText { get; set; }
+        public int? Width { get; set; }
+        public int? DisplayIndex { get; set; }
+        public bool Visible { get; set; }
+        public bool ReadOnly { get; set; } = false;
+        public DataGridViewContentAlignment Aligment { get; set; } = DataGridViewContentAlignment.MiddleLeft;
     }
 
     /// <summary>
