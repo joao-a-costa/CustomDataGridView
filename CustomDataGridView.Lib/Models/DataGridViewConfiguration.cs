@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace CustomDataGridView.Lib.Models
@@ -23,6 +24,8 @@ namespace CustomDataGridView.Lib.Models
         public int? DisplayIndex { get; set; }
         public bool Visible { get; set; }
         public bool ReadOnly { get; set; } = false;
+        public string Format { get; set; }
+        //public IFormatProvider FormatProvider { get; set; }
         public DataGridViewContentAlignment Aligment { get; set; } = DataGridViewContentAlignment.MiddleLeft;
     }
 
