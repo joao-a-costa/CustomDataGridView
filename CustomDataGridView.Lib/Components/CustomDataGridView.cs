@@ -313,8 +313,9 @@ namespace CustomDataGridView.Lib.Components
                     DisplayIndex = columnFound.DisplayIndex,
                     Visible = fe.Visible,
                     ReadOnly = fe.ReadOnly,
+                    Type = fe.CellType,
                     Aligment = fe.DefaultCellStyle.Alignment,
-                    Format = fe.DefaultCellStyle.Format
+                    Format = fe.DefaultCellStyle.Format,
                 });
             });
 
@@ -344,10 +345,10 @@ namespace CustomDataGridView.Lib.Components
                     fe.Name = columnFound.ColumnName;
                     fe.HeaderText = columnFound.HeaderText;
                     fe.Visible = columnFound.Visible;
+                    fe.ReadOnly = columnFound.ReadOnly;
                     fe.DefaultCellStyle.Alignment = columnFound.Aligment;
                     fe.DefaultCellStyle.Format = columnFound.Format;
                     fe.DefaultCellStyle.FormatProvider = CultureInfo.CurrentCulture.NumberFormat;
-                    fe.ReadOnly = columnFound.ReadOnly;
                     if (columnFound.Width.HasValue)
                         fe.Width = columnFound.Width.Value;
                     if (columnFound.DisplayIndex.HasValue)

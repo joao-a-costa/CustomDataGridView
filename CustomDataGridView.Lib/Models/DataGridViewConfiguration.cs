@@ -25,7 +25,7 @@ namespace CustomDataGridView.Lib.Models
         public bool Visible { get; set; }
         public bool ReadOnly { get; set; } = false;
         public string Format { get; set; }
-        //public IFormatProvider FormatProvider { get; set; }
+        public Type Type { get; set; } = typeof(string);
         public DataGridViewContentAlignment Aligment { get; set; } = DataGridViewContentAlignment.MiddleLeft;
     }
 
