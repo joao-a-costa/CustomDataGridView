@@ -248,30 +248,41 @@ namespace CustomDataGridView.Lib.Components
             try
             {
                 int nextRowIndex = currentRowIndex;
-                int nextColumnIndex = currentColumnIndex + 1;
+                int nextColumnIndex = currentColumnIndex;
 
-                // Check if the next column exists
-                if (nextColumnIndex >= Columns.Count)
+                do
                 {
-                    // Move to the first column of the next row
-                    nextColumnIndex = 0;
-                    nextRowIndex++;
-                }
+                    nextColumnIndex++;
 
-                // Check if the next row exists
-                if (nextRowIndex < Rows.Count)
-                {
-                    // Move to the next cell
-                    CurrentCell = this[nextColumnIndex, nextRowIndex];
+                    // Check if the next column exists
+                    if (nextColumnIndex >= Columns.Count)
+                    {
+                        // Move to the first column of the next row
+                        nextColumnIndex = 0;
+                        nextRowIndex++;
+                    }
+
+                    // Check if the next row exists
+                    if (nextRowIndex >= Rows.Count)
+                    {
+                        // No next cell, end editing
+                        EndEdit();
+                        return;
+                    }
                 }
-                else
-                {
-                    // No next cell, end editing
-                    EndEdit();
-                }
+                while (this.Columns[nextColumnIndex].ReadOnly || !this.Columns[nextColumnIndex].Visible);
+
+                // Move to the next cell
+                CurrentCell = this[nextColumnIndex, nextRowIndex];
             }
-            catch(Exception) { }
+            catch (Exception ex)
+            {
+                // Handle exception
+                // ...
+            }
         }
+
+
 
         #endregion
 
