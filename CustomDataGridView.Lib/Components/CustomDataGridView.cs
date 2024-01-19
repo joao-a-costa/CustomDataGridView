@@ -327,6 +327,9 @@ namespace CustomDataGridView.Lib.Components
                     Type = fe.CellType,
                     Aligment = fe.DefaultCellStyle.Alignment,
                     Format = fe.DefaultCellStyle.Format,
+                    FontStyle = fe.DefaultCellStyle.Font.Style,
+                    BackColor = fe.DefaultCellStyle.BackColor,
+                    ForeColor = fe.DefaultCellStyle.ForeColor
                 });
             });
 
@@ -350,6 +353,9 @@ namespace CustomDataGridView.Lib.Components
             Columns.Cast<DataGridViewColumn>().ToList().ForEach(fe =>
             {
                 var columnFound = dataGridViewConfiguration.Columns.FirstOrDefault(fod => fod.ColumnName == fe.Name);
+                var fontToSet = fe.DefaultCellStyle.Font == null ? Font : fe.DefaultCellStyle.Font;
+                var backColorToSet = fe.DefaultCellStyle.BackColor == null ? BackColor : fe.DefaultCellStyle.BackColor;
+                var foreColorToSet = fe.DefaultCellStyle.ForeColor == null ? ForeColor : fe.DefaultCellStyle.ForeColor;
 
                 if (columnFound != null)
                 {
@@ -360,6 +366,9 @@ namespace CustomDataGridView.Lib.Components
                     fe.DefaultCellStyle.Alignment = columnFound.Aligment;
                     fe.DefaultCellStyle.Format = columnFound.Format;
                     fe.DefaultCellStyle.FormatProvider = CultureInfo.CurrentCulture.NumberFormat;
+                    fe.DefaultCellStyle.Font = new System.Drawing.Font(fontToSet.FontFamily, fontToSet.Size, columnFound.FontStyle);
+                    fe.DefaultCellStyle.BackColor = columnFound.BackColor;
+                    fe.DefaultCellStyle.ForeColor = columnFound.ForeColor;
                     if (columnFound.Width.HasValue)
                         fe.Width = columnFound.Width.Value;
                     if (columnFound.DisplayIndex.HasValue)
@@ -375,6 +384,10 @@ namespace CustomDataGridView.Lib.Components
 
                 if (columnFound != null)
                 {
+                    var fontToSet = columnFound.DefaultCellStyle.Font == null ? Font : columnFound.DefaultCellStyle.Font;
+                    var backColorToSet = columnFound.DefaultCellStyle.BackColor == null ? BackColor : columnFound.DefaultCellStyle.BackColor;
+                    var foreColorToSet = columnFound.DefaultCellStyle.ForeColor == null ? ForeColor : columnFound.DefaultCellStyle.ForeColor;
+
                     columnFound.Name = fe.ColumnName;
                     columnFound.HeaderText = fe.HeaderText;
                     columnFound.Visible = fe.Visible;
@@ -382,6 +395,9 @@ namespace CustomDataGridView.Lib.Components
                     columnFound.DefaultCellStyle.Alignment = fe.Aligment;
                     columnFound.DefaultCellStyle.Format = fe.Format;
                     columnFound.DefaultCellStyle.FormatProvider = CultureInfo.CurrentCulture.NumberFormat;
+                    columnFound.DefaultCellStyle.Font = new System.Drawing.Font(fontToSet.FontFamily, fontToSet.Size, fe.FontStyle);
+                    columnFound.DefaultCellStyle.BackColor = fe.BackColor;
+                    columnFound.DefaultCellStyle.ForeColor = fe.ForeColor;
                     if (fe.Width.HasValue)
                         columnFound.Width = fe.Width.Value;
                     if (fe.DisplayIndex.HasValue)
@@ -520,7 +536,7 @@ namespace CustomDataGridView.Lib.Components
         /// </summary>
         private void CustomDataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            RefreshColumnsAvailable();
+            //RefreshColumnsAvailable();
         }
 
         /// <summary>
@@ -528,7 +544,7 @@ namespace CustomDataGridView.Lib.Components
         /// </summary>
         private void CustomDataGridView_Changed(object sender, DataGridViewColumnEventArgs e)
         {
-            RefreshColumnsAvailable();
+            //RefreshColumnsAvailable();
         }
 
         #endregion

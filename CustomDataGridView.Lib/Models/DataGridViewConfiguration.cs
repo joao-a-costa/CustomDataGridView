@@ -27,6 +27,9 @@ namespace CustomDataGridView.Lib.Models
         public string Format { get; set; }
         public Type Type { get; set; } = typeof(string);
         public DataGridViewContentAlignment Aligment { get; set; } = DataGridViewContentAlignment.MiddleLeft;
+        public System.Drawing.FontStyle FontStyle { get; set; } = System.Drawing.FontStyle.Regular;
+        public System.Drawing.Color BackColor { get; set; }
+        public System.Drawing.Color ForeColor { get; set; }
     }
 
     /// <summary>
