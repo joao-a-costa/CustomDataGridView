@@ -45,6 +45,7 @@ namespace CustomDataGridView.Win.Forms
         {
             // Set the data source for the CustomDataGridView
             customDataGridView1.DataSource = persons;
+            customDataGridView1.AutoGenerateColumns = false;
         }
 
         /// <summary>

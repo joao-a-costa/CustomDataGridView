@@ -49,32 +49,32 @@
             this.tsmDataGridViewOptions,
             this.tsmResetPreferences});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(195, 100);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(167, 92);
             // 
             // tsmSelectColumns
             // 
             this.tsmSelectColumns.Name = "tsmSelectColumns";
-            this.tsmSelectColumns.Size = new System.Drawing.Size(194, 24);
+            this.tsmSelectColumns.Size = new System.Drawing.Size(166, 22);
             this.tsmSelectColumns.Text = "Select Columns";
             this.tsmSelectColumns.Click += new System.EventHandler(this.tsmSelectColumns_Click);
             // 
             // tsmExportToExcel
             // 
             this.tsmExportToExcel.Name = "tsmExportToExcel";
-            this.tsmExportToExcel.Size = new System.Drawing.Size(194, 24);
+            this.tsmExportToExcel.Size = new System.Drawing.Size(166, 22);
             this.tsmExportToExcel.Text = "Export to excel";
             this.tsmExportToExcel.Visible = false;
             // 
             // tsmDataGridViewOptions
             // 
             this.tsmDataGridViewOptions.Name = "tsmDataGridViewOptions";
-            this.tsmDataGridViewOptions.Size = new System.Drawing.Size(194, 24);
+            this.tsmDataGridViewOptions.Size = new System.Drawing.Size(166, 22);
             this.tsmDataGridViewOptions.Text = "Table";
             // 
             // tsmResetPreferences
             // 
             this.tsmResetPreferences.Name = "tsmResetPreferences";
-            this.tsmResetPreferences.Size = new System.Drawing.Size(194, 24);
+            this.tsmResetPreferences.Size = new System.Drawing.Size(166, 22);
             this.tsmResetPreferences.Text = "Reset Preferences";
             this.tsmResetPreferences.Click += new System.EventHandler(this.tsmResetPreferences_Click);
             // 
