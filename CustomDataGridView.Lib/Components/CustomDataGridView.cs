@@ -4,6 +4,7 @@ using CustomDataGridView.Lib.Helpers;
 using CustomDataGridView.Lib.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
@@ -111,6 +112,18 @@ namespace CustomDataGridView.Lib.Components
         /// Default for ChangeColumnTypesToCustom
         /// </summary>
         public bool ChangeColumnTypesToCustom { get; set; } = true;
+        /// <summary>
+        /// Sets the image of the top left button
+        /// </summary>
+        public Image TopLeftButtonImage { get { return topLeftButton.Image; } set { topLeftButton.Image = value; } }
+        /// <summary>
+        /// Sets the FlatStyle of the top left button
+        /// </summary>
+        public FlatStyle TopLeftButtonFlatStyle { get { return topLeftButton.FlatStyle; } set { topLeftButton.FlatStyle = value; } }
+        /// <summary>
+        /// Sets the BackColor of the top left button
+        /// </summary>
+        public Color TopLeftButtonBackColor { get { return topLeftButton.BackColor; } set { topLeftButton.BackColor = value; } }
 
         #endregion
 
@@ -140,6 +153,11 @@ namespace CustomDataGridView.Lib.Components
             // Create a button for the TopLeftHeaderCell
             topLeftButton.Height = ColumnHeadersHeight;
             topLeftButton.Width = _topLeftButtonWidth;
+
+            topLeftButton.FlatStyle = FlatStyle.Flat;
+            topLeftButton.FlatAppearance.BorderSize = 0;
+            topLeftButton.BackColor = Color.White;
+            topLeftButton.Image = Properties.Resources.settings16x16;
 
             // Add the button to the DataGridView's TopLeftHeaderCell
             Controls.Add(topLeftButton);
@@ -228,6 +246,8 @@ namespace CustomDataGridView.Lib.Components
             // Set the button's position
             topLeftButton.Location = new System.Drawing.Point(x, y);
             topLeftButton.Visible = topLeftButtonVisible;
+
+            //AdjustButtonSizeAndPosition();
         }
 
         /// <summary>
