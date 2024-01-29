@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomColumns\DateTimePickerColumn.cs" />
     <Compile Include="Forms\ColumnSelectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +95,7 @@
       <DependentUpon>Global.resx</DependentUpon>
     </Compile>
     <Compile Include="Models\DataGridViewConfiguration.cs" />
+    <Compile Include="Models\PropertiesToIgnore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

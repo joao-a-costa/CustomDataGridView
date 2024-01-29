@@ -1,4 +1,6 @@
-﻿namespace CustomDataGridView.Win.Models
+﻿using System;
+
+namespace CustomDataGridView.Win.Models
 {
     public class Person
     {
@@ -6,6 +8,7 @@
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Age { get; set; }
+        public DateTime BirthDate { get; set; } = DateTime.Now;
         public string Email { get; set; }
         public string Email1 { get; set; }
         public string Email2 { get; set; }

@@ -1,4 +1,5 @@
-﻿using CustomDataGridView.Lib.Forms;
+﻿using CustomDataGridView.Lib.CustomColumns;
+using CustomDataGridView.Lib.Forms;
 using CustomDataGridView.Lib.Helpers;
 using CustomDataGridView.Lib.Models;
 using System;
@@ -106,6 +107,10 @@ namespace CustomDataGridView.Lib.Components
         /// Default DataGridViewConfiguration
         /// </summary>
         public DataGridViewConfiguration DefaultDataGridViewConfiguration { get; set; }
+        /// <summary>
+        /// Default for ChangeColumnTypesToCustom
+        /// </summary>
+        public bool ChangeColumnTypesToCustom { get; set; } = true;
 
         #endregion
 
@@ -275,14 +280,12 @@ namespace CustomDataGridView.Lib.Components
                 // Move to the next cell
                 CurrentCell = this[nextColumnIndex, nextRowIndex];
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Handle exception
                 // ...
             }
         }
-
-
 
         #endregion
 
@@ -536,7 +539,20 @@ namespace CustomDataGridView.Lib.Components
         /// </summary>
         private void CustomDataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            //RefreshColumnsAvailable();
+            if (ChangeColumnTypesToCustom)
+            {
+                // Create a list to store the columns to modify
+                var columnsToModify = Columns.Cast<DataGridViewColumn>()
+                    .Where(w => w.ValueType == typeof(DateTime))
+                    .ToList();
+
+                // Iterate over the list and modify the columns
+                foreach (DataGridViewColumn column in columnsToModify)
+                {
+                    // Specify the target column type (in this case, DataGridViewTextBoxColumn)
+                    CustomDataGridViewHelper.ChangeColumnType<DateTimePickerColumn>(this, column.Name);
+                }
+            }
         }
 
         /// <summary>
