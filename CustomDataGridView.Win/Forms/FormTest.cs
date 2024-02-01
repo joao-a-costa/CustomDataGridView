@@ -21,11 +21,11 @@ namespace CustomDataGridView.Win.Forms
         public List<string> SelectedColumns { get; private set; }
 
         // Sample data source
-        List<Person> persons = new List<Person>
+        List<Person> Persons = new List<Person>
         {
-            new Person { ID = 1, FirstName = "John", LastName = "Doe", Age = 30, Email = "john@example.com" },
-            new Person { ID = 2, FirstName = "Jane", LastName = "Smith", Age = 25, Email = "jane@example.com" },
-            new Person { ID = 3, FirstName = "Bob", LastName = "Johnson", Age = 35, Email = "bob@example.com" },
+            new Person { ID = 1, FirstName = "John", LastName = "Doe", Age = 30, Email = "john@example.com", Documents = new List<Document>() { new Document { DocumentName = $"Invoice 1", Volume = 1, Weight = 2 } } },
+            new Person { ID = 2, FirstName = "Jane", LastName = "Smith", Age = 25, Email = "jane@example.com", Documents = new List<Document>() { new Document { DocumentName = $"Invoice 2", Volume = 2, Weight = 3 } } },
+            new Person { ID = 3, FirstName = "Bob", LastName = "Johnson", Age = 35, Email = "bob@example.com", Documents = new List<Document>() { new Document { DocumentName = $"Invoice 2", Volume = 3, Weight = 4 } } }
         };
 
         /// <summary>
@@ -44,8 +44,9 @@ namespace CustomDataGridView.Win.Forms
         private void Form1_Load(object sender, EventArgs e)
         {
             // Set the data source for the CustomDataGridView
-            customDataGridView1.DataSource = persons;
+            customDataGridView1.DataSource = Persons;
             customDataGridView1.AutoGenerateColumns = false;
+            customDataGridView1.InitializeDataGridView();
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CustomDataGridView.Win.Models
 {
@@ -32,5 +33,6 @@ namespace CustomDataGridView.Win.Models
         public string Email19 { get; set; }
         public string Email20 { get; set; }
         public string Email21 { get; set; }
+        public List<Document> Documents { get; set; } = new List<Document>();
     }
 }

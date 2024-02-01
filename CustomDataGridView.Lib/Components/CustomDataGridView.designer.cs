@@ -91,8 +91,6 @@
             // CustomDataGridView
             // 
             this.RowTemplate.Height = 24;
-            this.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.CustomDataGridView_Changed);
-            this.ColumnRemoved += new System.Windows.Forms.DataGridViewColumnEventHandler(this.CustomDataGridView_Changed);
             this.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.CustomDataGridView_DataBindingComplete);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CustomDataGridView_Paint);
             this.contextMenuStrip1.ResumeLayout(false);
