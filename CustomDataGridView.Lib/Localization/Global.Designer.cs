@@ -63,6 +63,15 @@ namespace CustomDataGridView.Lib.Localization {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        internal static string labelControlShouldBeInContainer {
+            get {
+                return ResourceManager.GetString("labelControlShouldBeInContainer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         internal static string labelExportToExcel {
             get {
                 return ResourceManager.GetString("labelExportToExcel", resourceCulture);

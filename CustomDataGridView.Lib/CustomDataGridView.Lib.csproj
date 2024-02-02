@@ -65,6 +65,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\CustomDataGridViewDetail.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CustomColumns\DateTimePickerColumn.cs" />
     <Compile Include="Forms\ColumnSelectionForm.cs">
       <SubType>Form</SubType>
@@ -132,6 +135,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\settings16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minus16x16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

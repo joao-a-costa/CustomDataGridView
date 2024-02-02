@@ -3,6 +3,7 @@ using CustomDataGridView.Lib.Forms;
 using CustomDataGridView.Lib.Helpers;
 using CustomDataGridView.Lib.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
@@ -20,6 +21,11 @@ namespace CustomDataGridView.Lib.Components
         /// Default width of top left button
         /// </summary>
         private const int _topLeftButtonWidth = 25;
+        private const int _rowDefaultHeight = 22;
+        private const int _rowExpandedHeight = 200;
+        private const int _rowDefaultDivider = 0;
+        private const int _rowExpandedDivider = 300 - 22;
+        private const int _columnHeadersHeight = 40;
 
         #endregion
 
@@ -29,6 +35,36 @@ namespace CustomDataGridView.Lib.Components
         /// Default visibility of top left button
         /// </summary>
         private bool topLeftButtonVisible = true;
+        /// <summary>
+        /// Indicates whether the row should be collapsed.
+        /// </summary>
+        private bool doCollapseRow;
+        /// <summary>
+        /// List of rows that are currently expanded.
+        /// </summary>
+        private List<int> lstCurrentRows = new List<int>();
+        /// <summary>
+        /// Row header icon list.
+        /// </summary>
+        private ImageList rowHeaderIconList = new ImageList();
+        /// <summary>
+        /// Detail tab control.
+        /// </summary>
+        private CustomDataGridViewDetail detailTabControl = new CustomDataGridViewDetail { Height = 278 /*rowExpandedDivider*/ - 5/*rowDividerMargin*/ * 2, Visible = false };
+        /// <summary>
+        /// Flag indicating whether the row details are enabled.
+        /// </summary>
+        private bool enableRowDetails = false;
+
+        #endregion
+
+        #region "Enums"
+
+        public enum RowHeaderIcons
+        {
+            Expand = 1,
+            Collapse = 0
+        }
 
         #endregion
 
@@ -124,6 +160,10 @@ namespace CustomDataGridView.Lib.Components
         /// Sets the BackColor of the top left button
         /// </summary>
         public Color TopLeftButtonBackColor { get { return topLeftButton.BackColor; } set { topLeftButton.BackColor = value; } }
+        /// <summary>
+        /// Enable or disable the row details
+        /// </summary>
+        public bool EnableRowDetails { get { return enableRowDetails; } set { enableRowDetails = value; } }
 
         #endregion
 
@@ -136,9 +176,23 @@ namespace CustomDataGridView.Lib.Components
         {
             InitializeComponent();
 
+            ConfigureDataGridViewDetails();
             ConfigureButton();
-            ConfigureToolStripenus();
+            ConfigureToolStripMenus();
             ConfigureLocalization();
+        }
+
+        /// <summary>
+        /// Configure the DataGridView details
+        /// </summary>
+        private void ConfigureDataGridViewDetails()
+        {
+            rowHeaderIconList.Images.Add(Properties.Resources.minus16x16);
+            rowHeaderIconList.Images.Add(Properties.Resources.add16x16);
+
+            RowPostPaint += CustomDataGridView_RowPostPaint;
+            RowHeadersDefaultCellStyle.Padding = new Padding(RowHeadersWidth);
+            RowHeaderMouseClick += CustomDataGridView_RowHeaderMouseClick;
         }
 
         #endregion
@@ -166,7 +220,7 @@ namespace CustomDataGridView.Lib.Components
         /// <summary>
         /// Configure the ToolStripMenus for the DataGridView options
         /// </summary>
-        private void ConfigureToolStripenus()
+        private void ConfigureToolStripMenus()
         {
             foreach (var property in CustomDataGridViewHelper.GetPropertiesWithEnums(this))
             {
@@ -305,6 +359,110 @@ namespace CustomDataGridView.Lib.Components
                 // Handle exception
                 // ...
             }
+        }
+
+        /// <summary>
+        /// Hides the row header selector.
+        /// </summary>
+        private void HideRowHeaderSelector(DataGridViewRowPostPaintEventArgs e)
+        {
+            object o = Rows[e.RowIndex].HeaderCell.Value;
+
+            e.Graphics.DrawString(
+                o != null ? o.ToString() : "",
+                Font,
+                Brushes.Black,
+                new PointF((float)e.RowBounds.Left + 2, (float)e.RowBounds.Top + 4));
+        }
+
+        /// <summary>
+        /// Abre/Cierra la subGrilla de detalle
+        /// </summary>
+        /// <param name="rowIndex">Índice del registro a editar</param>
+        private void OpenDetail(int rowIndex)
+        {
+            if (lstCurrentRows.Contains(rowIndex))
+            {
+                lstCurrentRows.Clear();
+                Rows[rowIndex].Height = _rowDefaultHeight;
+                Rows[rowIndex].DividerHeight = _rowDefaultDivider;
+            }
+            else
+            {
+                if (lstCurrentRows.Count != 0)
+                {
+                    int eRow = lstCurrentRows[0];
+                    lstCurrentRows.Clear();
+                    Rows[eRow].Height = _rowDefaultHeight;
+                    Rows[eRow].DividerHeight = _rowDefaultDivider;
+                    ClearSelection();
+                    doCollapseRow = true;
+                    Rows[eRow].Selected = true;
+                }
+
+                lstCurrentRows.Add(rowIndex);
+
+                //Type parentType = TypeMethods.HeuristicallyDetermineType((IList)DataSource);
+                object parentObject = Rows[rowIndex].DataBoundItem;
+
+                // Detalle
+                detailTabControl.TabPages.Clear();
+
+                //detailTabControl.openDetailEvent += detailTabControl_OpenDetail;
+
+                if (parentObject != null)
+                {
+                    parentObject.GetType().GetProperties().Where(p => typeof(IList).IsAssignableFrom(p.PropertyType)).ToList().ForEach(fe =>
+                    {
+                        IList listOfDetail = (IList)fe.GetValue(parentObject);
+
+                        //string name = TypeMethods.GetDescriptionFromFieldInfo(listProperty);
+
+                        detailTabControl.AddChildgrid(listOfDetail, fe.Name);
+                    });
+
+                    //foreach (var listProperty in listProperties)
+                    //{
+
+                    //}
+
+                    //detailTabControl.AddChildgrid(parentObject, string.Empty);
+                    //IList listOfDetail = (IList)childField.GetValue(parentObject);
+
+                    //string name = TypeMethods.GetDescriptionFromFieldInfo(childField);
+
+
+                    //detailTabControl.AddChildgrid(listOfDetail, name);
+                    //foreach (FieldInfo childField in parentType.GetFields())
+                    //{
+                    //    if (childField.FieldType.IsGenericType
+                    //        && childField.FieldType.GetGenericTypeDefinition() == typeof(List<>)
+                    //        && childField.FieldType.GetGenericTypeDefinition() != typeof(List<double>))
+                    //    {
+                    //IList listOfDetail = (IList)childField.GetValue(parentObject);
+
+                    //        string name = TypeMethods.GetDescriptionFromFieldInfo(childField);
+
+
+                    //        detailTabControl.AddChildgrid(listOfDetail, name);
+                    //    }
+                    //}
+                }
+
+                // expandir la fila
+                if (detailTabControl.HasChildren)
+                {
+                    Rows[rowIndex].Height = _rowExpandedHeight;
+                    Rows[rowIndex].DividerHeight = _rowExpandedDivider;
+                }
+                else
+                {
+                    detailTabControl.Visible = false;
+                }
+            }
+            ClearSelection();
+            doCollapseRow = true;
+            Rows[rowIndex].Selected = true;
         }
 
         #endregion
@@ -456,6 +614,22 @@ namespace CustomDataGridView.Lib.Components
             }
         }
 
+        /// <summary>
+        /// Initialize the DataGridView
+        /// </summary>
+        public void InitializeDataGridView()
+        {
+            ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            ColumnHeadersHeight = _columnHeadersHeight;
+            ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+
+            if (Parent == null)
+                throw new Exception(Localization.Global.labelControlShouldBeInContainer);
+
+            Parent.Controls.Add(detailTabControl);
+            detailTabControl.BringToFront();
+        }
+
         #endregion
 
         #region "Protected"
@@ -576,11 +750,71 @@ namespace CustomDataGridView.Lib.Components
         }
 
         /// <summary>
-        /// Event handler for CustomDataGridView for ColumnAdded or ColumnRemoved
+        /// Event handler for CustomDataGridView for RowHeaderMouseClick
         /// </summary>
-        private void CustomDataGridView_Changed(object sender, DataGridViewColumnEventArgs e)
+        private void CustomDataGridView_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            //RefreshColumnsAvailable();
+            if (enableRowDetails)
+            {
+                if (Rows[e.RowIndex].DataBoundItem == null)
+                    return;
+                Rectangle rect = new Rectangle(_rowDefaultHeight / 2, (_rowDefaultHeight - 16) / 2, 16, 16);
+                if (rect.Contains(e.Location))
+                    OpenDetail(e.RowIndex);
+                else
+                    doCollapseRow = false;
+            }
+        }
+
+        /// <summary>
+        /// Event handler for CustomDataGridView for RowPostPaint
+        /// </summary>
+        private void CustomDataGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            if (enableRowDetails)
+            {
+                HideRowHeaderSelector(e);
+
+                //// Calculate the button's position to center it
+                Rectangle rect = new Rectangle(e.RowBounds.X + (_rowDefaultHeight / 2), e.RowBounds.Y + ((_rowDefaultHeight - 16) / 2), 16, 16);
+
+                if (doCollapseRow)
+                {
+                    if (lstCurrentRows.Contains(e.RowIndex))
+                    {
+                        Rows[e.RowIndex].DividerHeight = Rows[e.RowIndex].Height - _rowDefaultHeight;
+
+                        e.Graphics.DrawImage(rowHeaderIconList.Images[(int)RowHeaderIcons.Collapse], rect);
+
+                        detailTabControl.Location = new Point(e.RowBounds.Left + RowHeadersWidth, e.RowBounds.Top + _rowDefaultHeight + 20);
+                        detailTabControl.Width = e.RowBounds.Right - RowHeadersWidth;
+                        detailTabControl.Height = Rows[e.RowIndex].DividerHeight - 10;
+                        detailTabControl.Visible = true;
+                    }
+                    else
+                    {
+                        detailTabControl.Visible = false;
+                        e.Graphics.DrawImage(rowHeaderIconList.Images[(int)RowHeaderIcons.Expand], rect);
+                    }
+                    doCollapseRow = false;
+                }
+                else
+                {
+                    if (lstCurrentRows.Contains(e.RowIndex))
+                    {
+                        Rows[e.RowIndex].DividerHeight = Rows[e.RowIndex].Height - _rowDefaultHeight;
+                        e.Graphics.DrawImage(rowHeaderIconList.Images[(int)RowHeaderIcons.Collapse], rect);
+                        detailTabControl.Location = new Point(e.RowBounds.Left + RowHeadersWidth, e.RowBounds.Top + _rowDefaultHeight + 20);
+                        detailTabControl.Width = e.RowBounds.Right - RowHeadersWidth;
+                        detailTabControl.Height = Rows[e.RowIndex].DividerHeight - 10;
+                        detailTabControl.Visible = true;
+                    }
+                    else
+                    {
+                        e.Graphics.DrawImage(rowHeaderIconList.Images[(int)RowHeaderIcons.Expand], rect);
+                    }
+                }
+            }
         }
 
         #endregion

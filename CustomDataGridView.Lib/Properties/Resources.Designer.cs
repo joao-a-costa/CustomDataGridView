@@ -63,6 +63,26 @@ namespace CustomDataGridView.Lib.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap add16x16 {
+            get {
+                object obj = ResourceManager.GetObject("add16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap minus16x16 {
+            get {
+                object obj = ResourceManager.GetObject("minus16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap settings16x16 {
             get {
                 object obj = ResourceManager.GetObject("settings16x16", resourceCulture);
