@@ -164,6 +164,10 @@ namespace CustomDataGridView.Lib.Components
         /// Enable or disable the row details
         /// </summary>
         public bool EnableRowDetails { get { return enableRowDetails; } set { enableRowDetails = value; } }
+        /// <summary>
+        /// Gets or sets the DataGridViewColumnButtonEvents
+        /// </summary>
+        public List<DataGridViewColumnButtonEvent> DataGridViewColumnButtonEvents { get; set; }
 
         #endregion
 
@@ -376,9 +380,8 @@ namespace CustomDataGridView.Lib.Components
         }
 
         /// <summary>
-        /// Abre/Cierra la subGrilla de detalle
+        /// Opens or closes the detail of a row.
         /// </summary>
-        /// <param name="rowIndex">Índice del registro a editar</param>
         private void OpenDetail(int rowIndex)
         {
             if (lstCurrentRows.Contains(rowIndex))
@@ -402,13 +405,9 @@ namespace CustomDataGridView.Lib.Components
 
                 lstCurrentRows.Add(rowIndex);
 
-                //Type parentType = TypeMethods.HeuristicallyDetermineType((IList)DataSource);
                 object parentObject = Rows[rowIndex].DataBoundItem;
 
-                // Detalle
                 detailTabControl.TabPages.Clear();
-
-                //detailTabControl.openDetailEvent += detailTabControl_OpenDetail;
 
                 if (parentObject != null)
                 {
@@ -416,40 +415,10 @@ namespace CustomDataGridView.Lib.Components
                     {
                         IList listOfDetail = (IList)fe.GetValue(parentObject);
 
-                        //string name = TypeMethods.GetDescriptionFromFieldInfo(listProperty);
-
-                        detailTabControl.AddChildgrid(listOfDetail, fe.Name);
+                        detailTabControl.AddChildgrid(listOfDetail, fe.Name, DataGridViewColumnButtonEvents);
                     });
-
-                    //foreach (var listProperty in listProperties)
-                    //{
-
-                    //}
-
-                    //detailTabControl.AddChildgrid(parentObject, string.Empty);
-                    //IList listOfDetail = (IList)childField.GetValue(parentObject);
-
-                    //string name = TypeMethods.GetDescriptionFromFieldInfo(childField);
-
-
-                    //detailTabControl.AddChildgrid(listOfDetail, name);
-                    //foreach (FieldInfo childField in parentType.GetFields())
-                    //{
-                    //    if (childField.FieldType.IsGenericType
-                    //        && childField.FieldType.GetGenericTypeDefinition() == typeof(List<>)
-                    //        && childField.FieldType.GetGenericTypeDefinition() != typeof(List<double>))
-                    //    {
-                    //IList listOfDetail = (IList)childField.GetValue(parentObject);
-
-                    //        string name = TypeMethods.GetDescriptionFromFieldInfo(childField);
-
-
-                    //        detailTabControl.AddChildgrid(listOfDetail, name);
-                    //    }
-                    //}
                 }
 
-                // expandir la fila
                 if (detailTabControl.HasChildren)
                 {
                     Rows[rowIndex].Height = _rowExpandedHeight;
