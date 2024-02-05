@@ -97,6 +97,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Global.resx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataGridViewColumnButtonEvent.cs" />
     <Compile Include="Models\DataGridViewConfiguration.cs" />
     <Compile Include="Models\PropertiesToIgnore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
