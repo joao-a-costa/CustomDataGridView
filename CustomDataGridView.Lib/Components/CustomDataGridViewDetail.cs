@@ -1,4 +1,5 @@
-﻿using CustomDataGridView.Lib.Models;
+﻿using CustomDataGridView.Lib.Helpers;
+using CustomDataGridView.Lib.Models;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -21,7 +22,7 @@ namespace CustomDataGridView.Lib.Components
 
         private void AddColumnsToDataGridView()
         {
-            DataGridViewColumnButtonEvents.ForEach(fe =>
+            DataGridViewColumnButtonEvents?.ForEach(fe =>
             {
                 // Create the delete button column
                 var column = new DataGridViewButtonColumn
@@ -40,7 +41,7 @@ namespace CustomDataGridView.Lib.Components
         /// <summary>
         /// Adds a child grid to the tab control
         /// </summary>
-        internal void AddChildgrid(IList listOfDetail, string name, List<DataGridViewColumnButtonEvent> dataGridViewColumnButtonEvents)
+        internal void AddChildgrid(IList listOfDetail, string name, List<DataGridViewColumnButtonEvent> dataGridViewColumnButtonEvents, DataGridViewConfiguration defaultDataGridViewConfiguration)
         {
             DataGridViewColumnButtonEvents = dataGridViewColumnButtonEvents;
             CustomDataGridView = new CustomDataGridView
@@ -50,6 +51,7 @@ namespace CustomDataGridView.Lib.Components
                 AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
                 TopLeftButtonVisible = false
             };
+            CustomDataGridView.DefaultDataGridViewConfiguration = defaultDataGridViewConfiguration;
             CustomDataGridView.DataSource = listOfDetail;
             CustomDataGridView.CellContentClick += Grid_CellContentClick;
             CustomDataGridView.DataBindingComplete += Grid_DataBindingComplete;
@@ -63,6 +65,7 @@ namespace CustomDataGridView.Lib.Components
 
         private void Grid_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
+            CustomDataGridViewHelper.SetDataGridViewSettings(CustomDataGridView.DefaultDataGridViewConfiguration, CustomDataGridView, false);
             AddColumnsToDataGridView();
         }
 
