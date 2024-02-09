@@ -90,6 +90,14 @@ namespace CustomDataGridView.Lib.Components
         /// Event that is raised when the user reset columns.
         /// </summary>
         public event UserResetColumnsEventHandler UserResetColumns;
+        /// <summary>
+        /// Represents the method signature for the DetailCellEndEdit event.
+        /// </summary>
+        public delegate void DetailCellEndEditEventHandler(object sender, DataGridViewCellEventArgs e);
+        /// <summary>
+        /// Event that is raised when the user ends editing a cell in the detail grid.
+        /// </summary>
+        public event DetailCellEndEditEventHandler DetailCellEndEdit;
 
         #endregion
 
@@ -172,6 +180,10 @@ namespace CustomDataGridView.Lib.Components
         /// Gets or sets the DataGridViewColumnButtonEvents
         /// </summary>
         public List<DataGridViewColumnButtonEvent> DataGridViewColumnButtonEvents { get; set; }
+        /// <summary>
+        /// The custom data grid view detail
+        /// </summary>
+        public CustomDataGridView CustomDataGridViewDetail => detailTabControl?.CustomDataGridView;
 
         #endregion
 
@@ -180,15 +192,17 @@ namespace CustomDataGridView.Lib.Components
         /// <summary>
         /// Constructor for the CustomDataGridView class
         /// </summary>
-        public CustomDataGridView()
+        public CustomDataGridView(bool addDataGridViewDetails)
         {
             InitializeComponent();
 
-            ConfigureDataGridViewDetails();
+            if (addDataGridViewDetails)
+                ConfigureDataGridViewDetails();
             ConfigureButton();
             ConfigureToolStripMenus();
             ConfigureLocalization();
         }
+        public CustomDataGridView() : this(true) { }
 
         /// <summary>
         /// Configure the DataGridView details
@@ -420,6 +434,9 @@ namespace CustomDataGridView.Lib.Components
                         IList listOfDetail = (IList)fe.GetValue(parentObject);
 
                         detailTabControl.AddChildgrid(listOfDetail, fe.Name, DataGridViewColumnButtonEvents, DefaultDataGridViewConfigurationDetail);
+
+                        detailTabControl.CellEndEdit -= DetailTabControl_CellEndEdit;
+                        detailTabControl.CellEndEdit += DetailTabControl_CellEndEdit;
                     });
                 }
 
@@ -505,66 +522,6 @@ namespace CustomDataGridView.Lib.Components
         public void SetDataGridViewSettings(DataGridViewConfiguration dataGridViewConfiguration, bool setColumnsNotFoundVisible = true)
         {
             CustomDataGridViewHelper.SetDataGridViewSettings(dataGridViewConfiguration, this, setColumnsNotFoundVisible);
-            //Columns.Cast<DataGridViewColumn>().ToList().ForEach(fe =>
-            //{
-            //    var columnFound = dataGridViewConfiguration.Columns.FirstOrDefault(fod => fod.ColumnName == fe.Name);
-            //    var fontToSet = fe.DefaultCellStyle.Font == null ? Font : fe.DefaultCellStyle.Font;
-            //    var backColorToSet = fe.DefaultCellStyle.BackColor == null ? BackColor : fe.DefaultCellStyle.BackColor;
-            //    var foreColorToSet = fe.DefaultCellStyle.ForeColor == null ? ForeColor : fe.DefaultCellStyle.ForeColor;
-
-            //    if (columnFound != null)
-            //    {
-            //        fe.Name = columnFound.ColumnName;
-            //        fe.HeaderText = columnFound.HeaderText;
-            //        fe.Visible = columnFound.Visible;
-            //        fe.ReadOnly = columnFound.ReadOnly;
-            //        fe.DefaultCellStyle.Alignment = columnFound.Aligment;
-            //        fe.DefaultCellStyle.Format = columnFound.Format;
-            //        fe.DefaultCellStyle.FormatProvider = CultureInfo.CurrentCulture.NumberFormat;
-            //        fe.DefaultCellStyle.Font = new Font(fontToSet.FontFamily, fontToSet.Size, columnFound.FontStyle);
-            //        fe.DefaultCellStyle.BackColor = columnFound.BackColor;
-            //        fe.DefaultCellStyle.ForeColor = columnFound.ForeColor;
-            //        if (columnFound.Width.HasValue)
-            //            fe.Width = columnFound.Width.Value;
-            //        if (columnFound.DisplayIndex.HasValue)
-            //            fe.DisplayIndex = columnFound.DisplayIndex.Value;
-
-            //    }
-            //    else
-            //        fe.Visible = setColumnsNotFoundVisible;
-            //});
-            //dataGridViewConfiguration.Columns.ForEach(fe =>
-            //{
-            //    var columnFound = Columns.Cast<DataGridViewColumn>().FirstOrDefault(fod => fod.Name == fe.ColumnName);
-
-            //    if (columnFound != null)
-            //    {
-            //        var fontToSet = columnFound.DefaultCellStyle.Font == null ? Font : columnFound.DefaultCellStyle.Font;
-            //        var backColorToSet = columnFound.DefaultCellStyle.BackColor == null ? BackColor : columnFound.DefaultCellStyle.BackColor;
-            //        var foreColorToSet = columnFound.DefaultCellStyle.ForeColor == null ? ForeColor : columnFound.DefaultCellStyle.ForeColor;
-
-            //        columnFound.Name = fe.ColumnName;
-            //        columnFound.HeaderText = fe.HeaderText;
-            //        columnFound.Visible = fe.Visible;
-            //        columnFound.ReadOnly = fe.ReadOnly;
-            //        columnFound.DefaultCellStyle.Alignment = fe.Aligment;
-            //        columnFound.DefaultCellStyle.Format = fe.Format;
-            //        columnFound.DefaultCellStyle.FormatProvider = CultureInfo.CurrentCulture.NumberFormat;
-            //        columnFound.DefaultCellStyle.Font = new System.Drawing.Font(fontToSet.FontFamily, fontToSet.Size, fe.FontStyle);
-            //        columnFound.DefaultCellStyle.BackColor = fe.BackColor;
-            //        columnFound.DefaultCellStyle.ForeColor = fe.ForeColor;
-            //        if (fe.Width.HasValue)
-            //            columnFound.Width = fe.Width.Value;
-            //        if (fe.DisplayIndex.HasValue)
-            //            columnFound.DisplayIndex = fe.DisplayIndex.Value;
-            //    }
-            //});
-
-            //dataGridViewConfiguration.ExtraProperties.ForEach(fe =>
-            //{
-            //    CustomDataGridViewHelper.ChangeProperty(this, fe.Name,
-            //        Enum.Parse(GetType().GetProperty(fe.Name).PropertyType, fe.Value.ToString()));
-            //});
         }
 
         /// <summary>
@@ -788,6 +745,19 @@ namespace CustomDataGridView.Lib.Components
                         e.Graphics.DrawImage(rowHeaderIconList.Images[(int)RowHeaderIcons.Expand], rect);
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Event handler for CustomDataGridView for CellEndEdit
+        /// </summary>
+        private void DetailTabControl_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if any subscribers have been attached to the event
+            if (DetailCellEndEdit != null)
+            {
+                // Invoke the event
+                DetailCellEndEdit(this, e);
             }
         }
 

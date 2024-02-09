@@ -1,20 +1,26 @@
 ﻿using CustomDataGridView.Lib.Helpers;
 using CustomDataGridView.Lib.Models;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using static CustomDataGridView.Lib.Components.CustomDataGridView;
 
 namespace CustomDataGridView.Lib.Components
 {
     public class CustomDataGridViewDetail : TabControl
     {
+
+        public delegate void CellEndEditEventHandler(object sender, DataGridViewCellEventArgs e);
+        public event CellEndEditEventHandler CellEndEdit;
+
         #region "Properties"
 
         private List<DataGridViewColumnButtonEvent> DataGridViewColumnButtonEvents { get; set; }
-        private CustomDataGridView CustomDataGridView { get; set; }
+        public CustomDataGridView CustomDataGridView { get; set; }
 
         #endregion
 
@@ -55,6 +61,7 @@ namespace CustomDataGridView.Lib.Components
             CustomDataGridView.DataSource = listOfDetail;
             CustomDataGridView.CellContentClick += Grid_CellContentClick;
             CustomDataGridView.DataBindingComplete += Grid_DataBindingComplete;
+            CustomDataGridView.CellEndEdit += CustomDataGridView_CellEndEdit;
 
             TabPage tabpage = new TabPage { Text = name };
 
@@ -83,6 +90,16 @@ namespace CustomDataGridView.Lib.Components
 
                 if (action?.Action != null)
                     action.Action(dataGridView.Rows[e.RowIndex].DataBoundItem);
+            }
+        }
+
+        private void CustomDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if any subscribers have been attached to the event
+            if (CellEndEdit != null)
+            {
+                // Invoke the event
+                CellEndEdit(this, e);
             }
         }
 
