@@ -23,6 +23,7 @@ namespace CustomDataGridView.Lib.Models
         public int? Width { get; set; }
         public int? DisplayIndex { get; set; }
         public bool Visible { get; set; }
+        public bool AvailableToSelect { get; set; } = true;
         public bool ReadOnly { get; set; } = false;
         public string Format { get; set; }
         public Type Type { get; set; } = typeof(string);
