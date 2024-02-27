@@ -108,6 +108,10 @@ namespace CustomDataGridView.Lib.Components
         /// </summary>
         public List<string> ColumnsAvailable { get; private set; } = new List<string>();
         /// <summary>
+        /// Create a list to store the available column names that are not available to select
+        /// </summary>
+        public List<string> ColumnsNotAvailable { get; set; } = new List<string>();
+        /// <summary>
         /// Create a list to store the selected column names
         /// </summary>
         public List<string> ColumnsSelected { get; private set; } = new List<string>();
@@ -464,8 +468,10 @@ namespace CustomDataGridView.Lib.Components
         /// </summary>
         public void ShowColumnSelectionDialog()
         {
-            using (var columnSelectionForm = new ColumnSelectionForm(ColumnsAvailable,
-                Columns.Cast<DataGridViewColumn>().Where(w => w.Visible).OrderBy(ob => ob.DisplayIndex).Select(s => s.Name).ToList()))
+            var listOfColumns = Columns.Cast<DataGridViewColumn>();
+
+            using (var columnSelectionForm = new ColumnSelectionForm(listOfColumns.Select(s => s.Name).ToList().Except(ColumnsNotAvailable).ToList(),
+                listOfColumns.Where(w => w.Visible).OrderBy(ob => ob.DisplayIndex).Select(s => s.Name).ToList()))
             {
                 if (columnSelectionForm.ShowDialog() == DialogResult.OK)
                 {
