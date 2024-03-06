@@ -210,66 +210,69 @@ namespace CustomDataGridView.Lib.Helpers
             Components.CustomDataGridView customDataGridView,
             bool setColumnsNotFoundVisible = true)
         {
-            customDataGridView.Columns.Cast<DataGridViewColumn>().ToList().ForEach(fe =>
+            if (dataGridViewConfiguration != null)
             {
-                var columnFound = dataGridViewConfiguration.Columns.FirstOrDefault(fod => fod.ColumnName == fe.Name);
-                var fontToSet = fe.DefaultCellStyle.Font == null ? customDataGridView.Font : fe.DefaultCellStyle.Font;
-                var backColorToSet = fe.DefaultCellStyle.BackColor == null ? customDataGridView.BackColor : fe.DefaultCellStyle.BackColor;
-                var foreColorToSet = fe.DefaultCellStyle.ForeColor == null ? customDataGridView.ForeColor : fe.DefaultCellStyle.ForeColor;
-
-                if (columnFound != null)
+                customDataGridView.Columns.Cast<DataGridViewColumn>().ToList().ForEach(fe =>
                 {
-                    fe.Name = columnFound.ColumnName;
-                    fe.HeaderText = columnFound.HeaderText;
-                    fe.Visible = columnFound.Visible;
-                    fe.ReadOnly = columnFound.ReadOnly;
-                    fe.DefaultCellStyle.Alignment = columnFound.Aligment;
-                    fe.DefaultCellStyle.Format = columnFound.Format;
-                    fe.DefaultCellStyle.FormatProvider = CultureInfo.CurrentCulture.NumberFormat;
-                    fe.DefaultCellStyle.Font = new Font(fontToSet.FontFamily, fontToSet.Size, columnFound.FontStyle);
-                    fe.DefaultCellStyle.BackColor = columnFound.BackColor;
-                    fe.DefaultCellStyle.ForeColor = columnFound.ForeColor;
-                    if (columnFound.Width.HasValue)
-                        fe.Width = columnFound.Width.Value;
-                    if (columnFound.DisplayIndex.HasValue)
-                        fe.DisplayIndex = columnFound.DisplayIndex.Value;
+                    var columnFound = dataGridViewConfiguration.Columns.FirstOrDefault(fod => fod.ColumnName == fe.Name);
+                    var fontToSet = fe.DefaultCellStyle.Font == null ? customDataGridView.Font : fe.DefaultCellStyle.Font;
+                    var backColorToSet = fe.DefaultCellStyle.BackColor == null ? customDataGridView.BackColor : fe.DefaultCellStyle.BackColor;
+                    var foreColorToSet = fe.DefaultCellStyle.ForeColor == null ? customDataGridView.ForeColor : fe.DefaultCellStyle.ForeColor;
 
-                }
-                else
-                    fe.Visible = setColumnsNotFoundVisible;
-            });
-            dataGridViewConfiguration.Columns.ForEach(fe =>
-            {
-                var columnFound = customDataGridView.Columns.Cast<DataGridViewColumn>().FirstOrDefault(fod => fod.Name == fe.ColumnName);
+                    if (columnFound != null)
+                    {
+                        fe.Name = columnFound.ColumnName;
+                        fe.HeaderText = columnFound.HeaderText;
+                        fe.Visible = columnFound.Visible;
+                        fe.ReadOnly = columnFound.ReadOnly;
+                        fe.DefaultCellStyle.Alignment = columnFound.Aligment;
+                        fe.DefaultCellStyle.Format = columnFound.Format;
+                        fe.DefaultCellStyle.FormatProvider = CultureInfo.CurrentCulture.NumberFormat;
+                        fe.DefaultCellStyle.Font = new Font(fontToSet.FontFamily, fontToSet.Size, columnFound.FontStyle);
+                        fe.DefaultCellStyle.BackColor = columnFound.BackColor;
+                        fe.DefaultCellStyle.ForeColor = columnFound.ForeColor;
+                        if (columnFound.Width.HasValue)
+                            fe.Width = columnFound.Width.Value;
+                        if (columnFound.DisplayIndex.HasValue)
+                            fe.DisplayIndex = columnFound.DisplayIndex.Value;
 
-                if (columnFound != null)
+                    }
+                    else
+                        fe.Visible = setColumnsNotFoundVisible;
+                });
+                dataGridViewConfiguration?.Columns.ForEach(fe =>
                 {
-                    var fontToSet = columnFound.DefaultCellStyle.Font == null ? customDataGridView.Font : columnFound.DefaultCellStyle.Font;
-                    var backColorToSet = columnFound.DefaultCellStyle.BackColor == null ? customDataGridView.BackColor : columnFound.DefaultCellStyle.BackColor;
-                    var foreColorToSet = columnFound.DefaultCellStyle.ForeColor == null ? customDataGridView.ForeColor : columnFound.DefaultCellStyle.ForeColor;
+                    var columnFound = customDataGridView.Columns.Cast<DataGridViewColumn>().FirstOrDefault(fod => fod.Name == fe.ColumnName);
 
-                    columnFound.Name = fe.ColumnName;
-                    columnFound.HeaderText = fe.HeaderText;
-                    columnFound.Visible = fe.Visible;
-                    columnFound.ReadOnly = fe.ReadOnly;
-                    columnFound.DefaultCellStyle.Alignment = fe.Aligment;
-                    columnFound.DefaultCellStyle.Format = fe.Format;
-                    columnFound.DefaultCellStyle.FormatProvider = CultureInfo.CurrentCulture.NumberFormat;
-                    columnFound.DefaultCellStyle.Font = new Font(fontToSet.FontFamily, fontToSet.Size, fe.FontStyle);
-                    columnFound.DefaultCellStyle.BackColor = fe.BackColor;
-                    columnFound.DefaultCellStyle.ForeColor = fe.ForeColor;
-                    if (fe.Width.HasValue)
-                        columnFound.Width = fe.Width.Value;
-                    if (fe.DisplayIndex.HasValue)
-                        columnFound.DisplayIndex = fe.DisplayIndex.Value;
-                }
-            });
+                    if (columnFound != null)
+                    {
+                        var fontToSet = columnFound.DefaultCellStyle.Font == null ? customDataGridView.Font : columnFound.DefaultCellStyle.Font;
+                        var backColorToSet = columnFound.DefaultCellStyle.BackColor == null ? customDataGridView.BackColor : columnFound.DefaultCellStyle.BackColor;
+                        var foreColorToSet = columnFound.DefaultCellStyle.ForeColor == null ? customDataGridView.ForeColor : columnFound.DefaultCellStyle.ForeColor;
 
-            dataGridViewConfiguration.ExtraProperties.ForEach(fe =>
-            {
-                ChangeProperty(customDataGridView, fe.Name,
-                    Enum.Parse(customDataGridView.GetType().GetProperty(fe.Name).PropertyType, fe.Value.ToString()));
-            });
+                        columnFound.Name = fe.ColumnName;
+                        columnFound.HeaderText = fe.HeaderText;
+                        columnFound.Visible = fe.Visible;
+                        columnFound.ReadOnly = fe.ReadOnly;
+                        columnFound.DefaultCellStyle.Alignment = fe.Aligment;
+                        columnFound.DefaultCellStyle.Format = fe.Format;
+                        columnFound.DefaultCellStyle.FormatProvider = CultureInfo.CurrentCulture.NumberFormat;
+                        columnFound.DefaultCellStyle.Font = new Font(fontToSet.FontFamily, fontToSet.Size, fe.FontStyle);
+                        columnFound.DefaultCellStyle.BackColor = fe.BackColor;
+                        columnFound.DefaultCellStyle.ForeColor = fe.ForeColor;
+                        if (fe.Width.HasValue)
+                            columnFound.Width = fe.Width.Value;
+                        if (fe.DisplayIndex.HasValue)
+                            columnFound.DisplayIndex = fe.DisplayIndex.Value;
+                    }
+                });
+
+                dataGridViewConfiguration?.ExtraProperties.ForEach(fe =>
+                {
+                    ChangeProperty(customDataGridView, fe.Name,
+                        Enum.Parse(customDataGridView.GetType().GetProperty(fe.Name).PropertyType, fe.Value.ToString()));
+                });
+            }
         }
     }
 }
