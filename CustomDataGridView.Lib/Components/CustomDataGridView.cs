@@ -695,7 +695,8 @@ namespace CustomDataGridView.Lib.Components
             {
                 if (Rows[e.RowIndex].DataBoundItem == null)
                     return;
-                Rectangle rect = new Rectangle(_rowDefaultHeight / 2, (_rowDefaultHeight - 16) / 2, 16, 16);
+                int x = (TopLeftHeaderCell.Size.Width - rowHeaderIconList.Images[(int)RowHeaderIcons.Collapse].Width) / 2;
+                Rectangle rect = new Rectangle(x, (_rowDefaultHeight - 16) / 2, 16, 16);
                 if (rect.Contains(e.Location))
                     OpenDetail(e.RowIndex);
                 else
@@ -712,8 +713,13 @@ namespace CustomDataGridView.Lib.Components
             {
                 HideRowHeaderSelector(e);
 
+                int x = (TopLeftHeaderCell.Size.Width - rowHeaderIconList.Images[(int)RowHeaderIcons.Collapse].Width) / 2;
+                int y = (TopLeftHeaderCell.Size.Height - topLeftButton.Height) / 2;
+
                 //// Calculate the button's position to center it
-                Rectangle rect = new Rectangle(e.RowBounds.X + (_rowDefaultHeight / 2), e.RowBounds.Y + ((_rowDefaultHeight - 16) / 2), 16, 16);
+                //Rectangle rect = new Rectangle(e.RowBounds.X + (_rowDefaultHeight / 2), e.RowBounds.Y + ((_rowDefaultHeight - 16) / 2), 16, 16);
+                Rectangle rect = new Rectangle(x, e.RowBounds.Y + ((_rowDefaultHeight - 16) / 2), 16, 16);
+
 
                 if (doCollapseRow)
                 {
@@ -723,7 +729,7 @@ namespace CustomDataGridView.Lib.Components
 
                         e.Graphics.DrawImage(rowHeaderIconList.Images[(int)RowHeaderIcons.Collapse], rect);
 
-                        detailTabControl.Location = new Point(e.RowBounds.Left + RowHeadersWidth, e.RowBounds.Top + _rowDefaultHeight + 20);
+                        detailTabControl.Location = new Point(e.RowBounds.Left + RowHeadersWidth, e.RowBounds.Top + _rowDefaultHeight);
                         detailTabControl.Width = e.RowBounds.Right - RowHeadersWidth;
                         detailTabControl.Height = Rows[e.RowIndex].DividerHeight - 10;
                         detailTabControl.Visible = true;
@@ -741,7 +747,7 @@ namespace CustomDataGridView.Lib.Components
                     {
                         Rows[e.RowIndex].DividerHeight = Rows[e.RowIndex].Height - _rowDefaultHeight;
                         e.Graphics.DrawImage(rowHeaderIconList.Images[(int)RowHeaderIcons.Collapse], rect);
-                        detailTabControl.Location = new Point(e.RowBounds.Left + RowHeadersWidth, e.RowBounds.Top + _rowDefaultHeight + 20);
+                        detailTabControl.Location = new Point(e.RowBounds.Left + RowHeadersWidth, e.RowBounds.Top + _rowDefaultHeight);
                         detailTabControl.Width = e.RowBounds.Right - RowHeadersWidth;
                         detailTabControl.Height = Rows[e.RowIndex].DividerHeight - 10;
                         detailTabControl.Visible = true;
