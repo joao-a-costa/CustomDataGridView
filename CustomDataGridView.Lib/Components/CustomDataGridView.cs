@@ -493,21 +493,25 @@ namespace CustomDataGridView.Lib.Components
             {
                 var columnFound = Columns.Cast<DataGridViewColumn>().FirstOrDefault(fod => fod.Name == fe.Name);
 
-                dataGridViewConfiguration.Columns.Add(new DataGridViewConfigurationColumn
+                var dataGridViewConfigurationColumn = new DataGridViewConfigurationColumn
                 {
                     ColumnName = fe.Name,
                     HeaderText = fe.HeaderText,
-                    Width = columnFound.Width,
+                    //Width = columnFound.Width,
                     DisplayIndex = columnFound.DisplayIndex,
                     Visible = fe.Visible,
                     ReadOnly = fe.ReadOnly,
                     Type = fe.CellType,
                     Aligment = fe.DefaultCellStyle.Alignment,
                     Format = fe.DefaultCellStyle.Format,
-                    FontStyle = fe.DefaultCellStyle.Font.Style,
                     BackColor = fe.DefaultCellStyle.BackColor,
                     ForeColor = fe.DefaultCellStyle.ForeColor
-                });
+                };
+
+                if (fe.DefaultCellStyle.Font != null)
+                    dataGridViewConfigurationColumn.FontStyle = fe.DefaultCellStyle.Font.Style;
+
+                dataGridViewConfiguration.Columns.Add(dataGridViewConfigurationColumn);
             });
 
             CustomDataGridViewHelper.GetPropertiesWithEnums(this).ToList().ForEach(fe =>
